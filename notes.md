@@ -2,5 +2,5 @@
 
 ### Week 2
 
-[Link to MergeConflict File][Startup/conflictTest.md]
+[Link to MergeConflict File][conflictTest.md]
 
