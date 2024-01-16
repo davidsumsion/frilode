@@ -20,5 +20,7 @@ Frilode will be a platform where there are 3 types of users: A) those who own re
 - (CC collecting beyone the scope of this class, I spoke with a TA today. I'll implement later and i'll find instructions online).
 - (for now i'll take them to a landing page where i can collect thier emails and information)
 
-[comment]: #(Questions: security? how to automate a new page so it's not hard coded?)
+<!-- Questions: 
+security?
+how to automate a new page so it's not hard coded? -->
 
