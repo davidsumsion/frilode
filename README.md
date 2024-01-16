@@ -2,7 +2,7 @@
 
 
 ## Elevator Pitch
-Imagine Turro but for recreational vehicles! Turro is an excellent and well built platform for renting out a personal car-- like Airbnb for cars. I want to create a website that allows and is focused on recreational vehicles. There needs to be a different platform from Turro as recreational vehicles require much more upkeep and require more attention than a car does.
+Imagine Turo but for recreational vehicles! Turro is an excellent and well built platform for renting out a personal car-- like Airbnb for cars. I want to create a website that allows and is focused on recreational vehicles. There needs to be a different platform from Turro as recreational vehicles require much more upkeep and require more attention than a car does.
 
 ## Design
 
