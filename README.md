@@ -4,7 +4,7 @@ Frilode will be a platform where there are 3 types of users: A) those who own re
 
 ## Design
 ![Design of Startup](sketches/Design-1.jpg)
-![Sequence Diagram](sketches/Sequence
+![Sequence Diagram](sketches/sequenceDiagram-1.jpg)
 
 ## Key Features
 - Secure Login over HTTPS
