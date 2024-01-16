@@ -4,6 +4,7 @@ Frilode will be a platform where there are 3 types of users: A) those who own re
 
 ## Design
 ![Design of Startup](sketches/Design-1.jpg)
+## Sequence Diagram
 ![Sequence Diagram](sketches/sequenceDiagram-1.jpg)
 
 ## Key Features
@@ -23,5 +24,6 @@ Frilode will be a platform where there are 3 types of users: A) those who own re
 
 <!-- Questions: 
 security?
-how to automate a new page so it's not hard coded? -->
+how to automate a new page so it's not hard coded? 
+Is there a better liscence i can use? one that won't allow anyone to copy and profit off my code? -->
 
