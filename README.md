@@ -31,4 +31,10 @@ Is there a better liscence i can use? one that won't allow anyone to copy and pr
 - ssh -i ~/Documents/keys/prodFri.pem ubuntu@35.171.103.203
 - Elastic IP Address: 35.171.103.203
 - ls -l
-- 
+
+## HTML structure
+- I learned a couple new commands in HTML:
+    - <img src="" alt = "" width="">
+    - Quote like \<!-- -->
+    - the table syntax
+ 
