@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Tell browsers not to scale the viewport automatically -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>FRLD</title>
+        <!-- <link rel="icon" href="favicon.ico" /> -->
+    </head>
+    <body>
+        <!-- Use header, main, and footer elements to give semantic structure -->
+        <header>
+          <h1>Fri-lode, rent your recreational vehicles<sup>&reg;</sup></h1>
+    
+          <!-- Navigation elements -->
+          <nav>
+            <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+            <menu>
+              <li><a href="index.html">Login & Rent a vehicle</a></li>
+              <li><a href="query.html">Search</a></li>
+              <li><a href="marketplace.html">Results</a></li>
+              <li><a href="examplevehicle.html">ExampleVehicle</a></li>
+              <li><a href="marketing.html"> Leave your Email </a></li>
+
+              <li><a href="userABLogin.html">Login & Rent out my vehicle</a></li>
+              <li><a href="myVehicles.html"> MyVehicles </a></li>
+              <li><a href="availability.html"> MyVehicles Availability </a></li>
+              <li><a href="VehicleAdded.html"> Successfully Added Vehicle </a></li>
+              <li><a href="addAnotherVehicle.html"> Add Another Vehicle </a></li>
+
+            </menu>
+          </nav>
+    
+          <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+          <hr />
+        </header>
+
+    <main>
+      <h2> SkiDoo 2021 </h2>
+
+      <br />
+
+      <div>
+        <table>
+            <!-- First Row in Table-->
+          <tr>
+            <td>
+                <form action="VehicleAdded.html">
+                <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
+                    <label for="imageUpload">Choose an image to upload:</label>
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                    <input type="submit" value="Upload">
+                </form>
+            </td>
+            <td>
+                <label for="name">Price/day:</label>
+                <input type="text" id="name" placeholder="$/day" />
+                <br />
+                <label for="name">Price/hour:</label>
+                <input type="text" id="name" placeholder="$/hour" />
+                <br />
+                <label for="name">Make:</label>
+                <input type="text" id="name" placeholder="Make" />
+                <br />
+                <label for="name">Model:</label>
+                <input type="text" id="name" placeholder="Model" />
+                <br />
+                <label for="name">Description:</label>
+                <input type="text" id="name" placeholder="Description" />
+                <br />
+            </td>
+          </tr>
+        </table>
+      </div>
+
+
+
+    </main>
+
+    <footer>
+        <hr />
+        <span class="text-reset">Author Name</span>
+        <p> David Sumsion</p>
+        <a href="https://github.com/davidsumsion/Startup">MyGitHub</a>
+      </footer>
+  </body>
+</html>
