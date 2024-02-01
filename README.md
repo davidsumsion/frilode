@@ -37,8 +37,9 @@ Is there a better liscence i can use? one that won't allow anyone to copy and pr
 For this deliverable I built out the structure of my application using HTML.
 
 - **HTML pages** - 10 HTML pages. 2 groups of 5 (group 1 for User C, group 2 for User A&B). Refer to drawings for what the difference is between Users A, B & C. For the user C group I added Login to Rent, Search, Results, Example vehicle, and leave your email page. For Users A&B I added Login to rent out a vehicle, a list of a user's vehicles, an avaialibility of vehicles viewer, an add vehicle page and a success page.
-- **Links** - The login page automatically links to the voter page. The voter page contains links for every voting choice.
-- **Text** - Each of the voting choices is represented by a textual description.
-- **Images** - I couldn't figure out how to include an image and so I didn't do this. 😔
-- **DB/Login** - Input box and submit button for login. The voting choices represent data pulled from the database.
-- **WebSocket** - The count of voting results represent the tally of realtime votes.
+- **Links** - There are links to everypage in the header of every page. I did this for easy access for the grader. In reality this is not how I would set up this website. You can click through the website using the buttons as well.
+- **Text** - Gives info of a specefic vehicle. you enter which vehicle you want, when and where and you can choose which one you want.
+- **Images** - I included images of example jetskis. In reality this would pull from the database and allow for an A or B User to upload images.
+- **DB/Login** - Secure login for user C and for users A&B. This allows users to access the main database to see available vehicles or allows users A&B to see thier vehicles and the information associated with it.
+- **WebSocket** - The search page (User C) queries a DB that return infomation from realitime uploads from users A&B. The info is realtime and users can rent which pulls the avaialbe vehicle off the market for certain queries.
+
