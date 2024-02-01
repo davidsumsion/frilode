@@ -34,11 +34,9 @@ Is there a better liscence i can use? one that won't allow anyone to copy and pr
 
 ## HTML deliverable
 
-➡️ The following is an example of the required information for the `Startup HTML` deliverable
-
 For this deliverable I built out the structure of my application using HTML.
 
-- **HTML pages** - 10 HTML pages. 2 groups of 5 (group 1 for User C, group 2 for User A&B). 
+- **HTML pages** - 10 HTML pages. 2 groups of 5 (group 1 for User C, group 2 for User A&B). Refer to drawings for what the difference is between Users A, B & C. For the user C group I added Login to Rent, Search, Results, Example vehicle, and leave your email page. For Users A&B I added Login to rent out a vehicle, a list of a user's vehicles, an avaialibility of vehicles viewer, an add vehicle page and a success page.
 - **Links** - The login page automatically links to the voter page. The voter page contains links for every voting choice.
 - **Text** - Each of the voting choices is represented by a textual description.
 - **Images** - I couldn't figure out how to include an image and so I didn't do this. 😔
