@@ -42,4 +42,5 @@ For this deliverable I built out the structure of my application using HTML.
 - **Images** - I included images of example jetskis. In reality this would pull from the database and allow for an A or B User to upload images.
 - **DB/Login** - Secure login for user C and for users A&B. This allows users to access the main database to see available vehicles or allows users A&B to see thier vehicles and the information associated with it.
 - **WebSocket** - The search page (User C) queries a DB that return infomation from realitime uploads from users A&B. The info is realtime and users can rent which pulls the avaialbe vehicle off the market for certain queries.
+- **PlaceHolder** I have a placeholder on my availability page for a calendar from a 3rd party. i was originally going to code out a table with placeholders with tons of information and I decided taht someone else has probably done all that work. I looked it up and sure enough I didn't need to code it out. My PlaceHolder is the text [Calendar of Vehicles:] on my availibility.html page (named myVehiclesAvalability)
 
