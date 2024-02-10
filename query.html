@@ -40,43 +40,31 @@
     <main style="padding: 20px;">
       <h2> Search</h2>
       <div class="bd-example">
-        <div class="btn-group">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            What?
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="#">Jet Skis</a></li>
-            <li><a class="dropdown-item" href="#">Snowmobiles</a></li>
-            <li><a class="dropdown-item" href="#">Razors</a></li>
-          </ul>
-        </div>
+        <form class="px-4 py-3" method="get" action="marketplace.html">
+          <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              What do you want to rent?
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">Jet Skis</a></li>
+              <li><a class="dropdown-item" href="#">Snowmobiles</a></li>
+              <li><a class="dropdown-item" href="#">Razors</a></li>
+            </ul>
+          </div>
+          <br />
+          <div class="mb-3">
+            <label for="Search" class="form-label">Where?</label>
+            <input class="form-control" id="location" placeholder="location">
+          </div>
 
-        <div class="btn-group">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            Where?
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li><a class="dropdown-item" href="#">Menu item</a></li>
-            <li><a class="dropdown-item" href="#">Menu item</a></li>
-            <li><a class="dropdown-item" href="#">Menu item</a></li>
-          </ul>
-        </div>
-        <form class="px-4 py-3">
           <div class="mb-3">
-            <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+            <label for="Search" class="form-label">Starting on</label>
+            <input class="form-control" id="start" placeholder="MM/DD/YYYY">
           </div>
+
           <div class="mb-3">
-            <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-          </div>
-          <div class="mb-3">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-              <label class="form-check-label" for="dropdownCheck">
-                Remember me
-              </label>
-            </div>
+            <label for="Search" class="form-label">Ending on</label>
+            <input class="form-control" id="end" placeholder="MM/DD/YYYY">
           </div>
           <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
@@ -84,10 +72,9 @@
       </div>
 
 
-      <div>
+      <!--  <div>
 
-        <table>
-            <!-- First Row in Table-->
+       <table>
           <tr>
             <td>
                 <form method="get" action="marketplace.html">            
@@ -131,7 +118,7 @@
             </button>
         </form>
       </div>
-      <br />
+      <br /> -->
 
     </main>
 
