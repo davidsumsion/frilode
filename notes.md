@@ -19,3 +19,9 @@
     - how to deploy
         - ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
  
+## CSS 
+- For this deliverable I got my application close to the end styling.
+- I made 10 pages once again. I made the header and the footer consistent across all of them.
+- My app looks great on all window sizes and devices
+- I used good spacing and contrast
+- I used consistent fonts accross my app
