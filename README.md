@@ -44,3 +44,12 @@ For this deliverable I built out the structure of my application using HTML.
 - **WebSocket** - The search page (User C) queries a DB that return infomation from realitime uploads from users A&B. The info is realtime and users can rent which pulls the avaialbe vehicle off the market for certain queries.
 - **PlaceHolder** I have a placeholder on my availability page for a calendar from a 3rd party. i was originally going to code out a table with placeholders with tons of information and I decided taht someone else has probably done all that work. I looked it up and sure enough I didn't need to code it out. My PlaceHolder is the text [Calendar of Vehicles:] on my availibility.html page (named myVehiclesAvalability)
 
+
+## CSS deliverable
+- **Header, footer** consistent accross all pages
+- **Body** styled according to the planned function of each page
+- **Navigation elements** I included all nav elements in the header. On a relistic page like this I wouldn't implement it like this, but it's there so you can grade it
+- **Responsive window sizing** My webapp looks great on all sizes of device screens including the iphone
+- **Application elements** I used good contrast and whitespace
+- **Application text content** I used consistent font accross all texts on the webapp
+- **Application Images** I rounded the corners of images to fit in the grid i made for marketplace and myVehicles.
