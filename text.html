@@ -39,99 +39,52 @@
             <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
             <hr />
             <style>
-    .container {
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-auto-rows: 400px;
-    grid-gap: 1em;
-  }
-  .card {
-    border: #333 solid thick;
-    border-radius: 1em;
-    text-align: center;
-  }
-  .card.long {
-    grid-column: span 3;
-    /* gird-row: span 2; */
-    text-align: left;
-    padding: 20px;
-    height: 5000px;
-  }
-
-  img.market-photos {
-    border-radius: 10px;
-  }
-
-  main h3 {
-    font-size: 20px;
-    padding: 10px;
-    
-  }
-  main {
-    padding: 50px;
-  }
-  main h2 {
-    padding: 20px;
-  }
-  .mb-3 {
-    padding:20px
-
-  }
-  </style>
+              /* header{
+                background-color: #c49f00;
+              } */
+            </style>
           </header>
         </div>
 
     <main>
-      <div class="bd-example" style="padding: 20px; padding-left:80px; padding-right:200px;" >
-        <h2> SkiDoo 2021 </h2>
-          <h5>
-            Input Your Vehicles Information: 
-          </h5>
+      <h2> SkiDoo 2021 </h2>
 
-          <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Name Your Vehicle</label>
-            <input class="form-control" id="location" placeholder="Name" style="width:150px">
-          </div>
+      <br />
 
-          <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Price/Day</label>
-            <input class="form-control" id="location" placeholder="$Price/Day" style="width:150px">
-          </div>
+      <div>
+        <table>
+            <!-- First Row in Table-->
+          <tr>
+            <td>
+                <form action="VehicleAdded.html">
+                <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
+                    <label for="imageUpload">Choose an image to upload:</label>
+                    <input type="file" id="imageUpload" name="imageUpload" accept="image/*">
+                    <input type="submit" value="Upload">
+                </form>
+            </td>
+            <td>
+                <label for="name">Price/day:</label>
+                <input type="text" id="name" placeholder="$/day" />
+                <br />
+                <label for="name">Price/hour:</label>
+                <input type="text" id="name" placeholder="$/hour" />
+                <br />
+                <label for="name">Make:</label>
+                <input type="text" id="name" placeholder="Make" />
+                <br />
+                <label for="name">Model:</label>
+                <input type="text" id="name" placeholder="Model" />
+                <br />
+                <label for="name">Description:</label>
+                <input type="text" id="name" placeholder="Description" />
+                <br />
+            </td>
+          </tr>
+        </table>
+      </div>
 
-          <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Price/Hour</label>
-            <input class="form-control" id="location" placeholder="$Price/Hour" style="width:150px">
-          </div>
 
-          <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Make</label>
-            <input class="form-control" id="location" placeholder="Make" style="width:150px">
-          </div>
-
-          <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Model</label>
-            <input class="form-control" id="Model" placeholder="Model" style="width:150px">
-          </div>
-
-          <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Description</label>
-            <input class="form-control" id="location" placeholder="$Price/Hour" style="width:600px; height:200px">
-          </div>
-
-          <form action="/upload" method="POST" enctype="multipart/form-data" style="display: flex; align-items: center;">
-            <div class="form-group" style="padding-left:20px;">
-              <label for="imageUpload">Choose an image:</label>
-              <input type="file" class="form-control-file" id="imageUpload" name="image">
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-          </form>
-
-          <br></br>
-            <div>
-            <a href="VehicleAdded.html" class="btn btn-dark">Add My Vehicle</a>
-          </div>
-          
 
     </main>
 
