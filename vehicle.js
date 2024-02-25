@@ -59,18 +59,25 @@ function search(vehicleType){
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    var container = document.querySelector(".container");
+    var container = document.querySelector(".containerMarketplace");
     if(container) {
         finishedCards();
     }
 });
 
+document.addEventListener("DOMContentLoaded", function(){
+    var descriptive = document.querySelector(".descriptivetitle");
+    if(descriptive) {
+        displayVehicle();
+    }
+});
+
 function displayVehicle(vehicle = myVehicleDA.queryResults[0]){
-    document.querySelector('#title').textContent = vehicle.name;
+    document.querySelector('#descriptivetitle').textContent = vehicle.name;
     document.querySelector('#specImg').src = vehicle.image;
     document.querySelector("#specTitle").textContent = vehicle.name;
     document.querySelector("#specInfo").innerHTML = `Price/day: ${vehicle.priceDay}$<br>Price/hour: ${vehicle.priceHour}$<br>Make: ${vehicle.make}<br>Model: ${vehicle.model}`;
-    document.querySelector("longDescription") = vehicle.description;
+    document.querySelector("#longDescription").textContent = vehicle.description;
 }
 
 
@@ -104,7 +111,7 @@ function finishedCards(data = myVehicleDA.queryResults) {
         form.appendChild(moreInfo);
         // moreInfo.class = "btn btn-primary btn-sm";
 
-        var container = document.getElementById("container");
+        var container = document.getElementById("containerMarketplace");
         vehicleCard.appendChild(img);
         vehicleCard.appendChild(nameofVehicle);
         vehicleCard.appendChild(info);
