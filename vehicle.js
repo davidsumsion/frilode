@@ -36,7 +36,7 @@ const dropDownMenu = document.getElementById("vehicleTypeButton")
 
 class VehicleDA {
     constructor(){
-        this.queryResults = fakeData;
+        this.queryResults = fakeData();
     }
 
     putVehicle(vehicle){ localStorage.setItem(vehicle.name, vehicle) }
@@ -46,17 +46,16 @@ myVehicleDA = new VehicleDA();
 
 function search(vehicleType){
     console.log("reached search")
-    let returnList = []
-    for (let i = 0; i < localStorage.length-1; i++){
+    // let returnList = []
+    for (let i = 0; i < localStorage.length; i++){
         // let key = localStorage.key(i);
         let value = localStorage.value(i);
         if (value instanceof Vehicle){
             if (value.vehicleType === typeVehicle){
-                returnList.push(value);
+                myVehicleDA.queryResults.push(value);
             }
         }
     }
-    myVehicleDA.queryResults = returnList;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -65,6 +64,14 @@ document.addEventListener("DOMContentLoaded", function() {
         finishedCards();
     }
 });
+
+function displayVehicle(vehicle = myVehicleDA.queryResults[0]){
+    document.querySelector('#title').textContent = vehicle.name;
+    document.querySelector('#specImg').src = vehicle.image;
+    document.querySelector("#specTitle").textContent = vehicle.name;
+    document.querySelector("#specInfo").innerHTML = `Price/day: ${vehicle.priceDay}$<br>Price/hour: ${vehicle.priceHour}$<br>Make: ${vehicle.make}<br>Model: ${vehicle.model}`;
+    document.querySelector("longDescription") = vehicle.description;
+}
 
 
 
@@ -87,14 +94,21 @@ function finishedCards(data = myVehicleDA.queryResults) {
 
         info.innerHTML = `Price/day: ${data[i].priceDay}$<br>Price/hour: ${data[i].priceHour}$<br>Make: ${data[i].make}<br>Model: ${data[i].model}`
 
-        moreInfo.type = "submit";
-        moreInfo.class = "btn btn-primary btn-sm";
+        // moreInfo.type = "submit";
+        moreInfo.setAttribute("type", "submit")
+        moreInfo.classList.add("btn", "btn-primary", "btn-sm");
+        moreInfo.textContent = "See More Info";
+        var form = document.createElement("form");
+        form.setAttribute("method", "get");
+        form.setAttribute("action", "examplevehicle.html")
+        form.appendChild(moreInfo);
+        // moreInfo.class = "btn btn-primary btn-sm";
 
         var container = document.getElementById("container");
         vehicleCard.appendChild(img);
         vehicleCard.appendChild(nameofVehicle);
         vehicleCard.appendChild(info);
-        vehicleCard.appendChild(moreInfo);
+        vehicleCard.appendChild(form);
         container.appendChild(vehicleCard);
     }
 }
