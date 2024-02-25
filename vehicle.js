@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function(){
-    var descriptive = document.querySelector(".descriptivetitle");
+    var descriptive = document.querySelector("#descriptivetitle");
     if(descriptive) {
         displayVehicle();
     }
