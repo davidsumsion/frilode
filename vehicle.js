@@ -119,22 +119,13 @@ function finishedCards(data = myVehicleDA.queryResults) {
         container.appendChild(vehicleCard);
     }
 }
-    //   }
 
 
+function addNewVehicle(){
+    const emailEl = document.querySelector("#Email");
 
+}
 
-//       const headers = parseHeader(data);
-//       const tableElement = generateTable(headers, data);
-  
-//       const output = document.getElementById("output");
-  
-//       removeAllChildNodes(output);
-//       output.appendChild(tableElement);
-//     } else {
-//       outputData("invalid input", data);
-//     }
-//   }
 
 
 
