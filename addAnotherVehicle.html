@@ -7,6 +7,7 @@
         <title>addAnotherVehicle</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="https://getbootstrap.com/docs/5.1/assets/css/docs.css" rel="stylesheet">
+        <script src="vehicle.js"></script>
         <!-- <link rel="icon" href="favicon.ico" /> -->
     </head>
     <body>
@@ -90,33 +91,38 @@
           </h5>
 
           <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Name Your Vehicle</label>
-            <input class="form-control" id="location" placeholder="Name" style="width:150px">
+            <label for="vehicleType" class="form-label" style="padding-right:10px;">Vehicle Type: jetSki, snowmobile, razor</label>
+            <input class="form-control" id="vehicleType" placeholder="jetSki, snowmobile, razor" style="width:150px">
           </div>
 
           <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Price/Day</label>
-            <input class="form-control" id="location" placeholder="$Price/Day" style="width:150px">
+            <label for="name" class="form-label" style="padding-right:10px;">Name Your Vehicle</label>
+            <input class="form-control" id="name" placeholder="Name" style="width:150px">
           </div>
 
           <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Price/Hour</label>
-            <input class="form-control" id="location" placeholder="$Price/Hour" style="width:150px">
+            <label for="PriceDay" class="form-label" style="padding-right:10px;">Price/Day</label>
+            <input class="form-control" id="PriceDay" placeholder="$Price/Day" style="width:150px">
           </div>
 
           <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Make</label>
-            <input class="form-control" id="location" placeholder="Make" style="width:150px">
+            <label for="PriceHour" class="form-label" style="padding-right:10px;">Price/Hour</label>
+            <input class="form-control" id="PriceHour" placeholder="$Price/Hour" style="width:150px">
           </div>
 
           <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Model</label>
-            <input class="form-control" id="Model" placeholder="Model" style="width:150px">
+            <label for="make" class="form-label" style="padding-right:10px;">Make</label>
+            <input class="form-control" id="make" placeholder="Make" style="width:150px">
           </div>
 
           <div class="mb-3" style="display: flex; align-items: center;">
-            <label for="Price/Day" class="form-label" style="padding-right:10px;">Description</label>
-            <input class="form-control" id="location" placeholder="$Price/Hour" style="width:600px; height:200px">
+            <label for="model" class="form-label" style="padding-right:10px;">Model</label>
+            <input class="form-control" id="model" placeholder="Model" style="width:150px">
+          </div>
+
+          <div class="mb-3" style="display: flex; align-items: center;">
+            <label for="description" class="form-label" style="padding-right:10px;">Description</label>
+            <input class="form-control" id="description" placeholder="Description" style="width:600px; height:200px">
           </div>
 
           <form action="/upload" method="POST" enctype="multipart/form-data" style="display: flex; align-items: center;">
@@ -129,7 +135,9 @@
 
           <br></br>
             <div>
-            <a href="VehicleAdded.html" class="btn btn-dark">Add My Vehicle</a>
+              <button class="btn btn-primary" onclick="addNewVehicle()">Add My Vehicle</button>
+
+            <!-- <a href="VehicleAdded.html" class="btn btn-dark">Add My Vehicle</a> -->
           </div>
           
 

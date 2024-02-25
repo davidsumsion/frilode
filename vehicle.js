@@ -121,9 +121,19 @@ function finishedCards(data = myVehicleDA.queryResults) {
 }
 
 
-function addNewVehicle(){
-    const emailEl = document.querySelector("#Email");
 
+function addNewVehicle(){
+    const nameEl = document.querySelector("#name");
+    const vehicleTypeEl = document.querySelector("#vehicleType");
+    const priceDayEl = document.querySelector("#PriceDay");
+    const priceHourEl = document.querySelector("#PriceHour");
+    const makeEl = document.querySelector("#make");
+    const modelEl = document.querySelector("#model");
+    const descriptionEl = document.querySelector("#description");
+    const imageEl = document.querySelector("#imageUpload");
+    let newVehicle = new Vehicle(vehicleTypeEl.value, nameEl.value, priceDayEl.value, priceHourEl.value, makeEl.value, modelEl.value, descriptionEl.value, "");
+    localStorage.setItem(newVehicle.getName(), newVehicle);
+    window.location.href = "VehicleAdded.html";
 }
 
 
