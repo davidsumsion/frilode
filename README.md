@@ -55,5 +55,10 @@ For this deliverable I built out the structure of my application using HTML.
 - **Application Images** I rounded the corners of images to fit in the grid i made for marketplace and myVehicles.
 
 
-## JS deliverable
-- ** 
+## JavaScript deliverable
+For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
+
+- **login** - When you press enter or the login button it takes you to the query page.
+-**database** - Displayed the pictures and vehicles. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
+-**WebSocket** -
+-**application logic** - The vehicles change by what data is uploaded from the user.
