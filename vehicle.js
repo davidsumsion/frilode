@@ -32,6 +32,26 @@ document.addEventListener("DOMContentLoaded", function() {
 }); 
 
 document.addEventListener("DOMContentLoaded", function() {
+    const snowmobile = document.getElementById("snowmobile")
+    if (snowmobile){
+        snowmobile.addEventListener("click", function(event){
+            search("snowmobileArr")
+            window.location.href = "marketplace.html";
+        });   
+    }
+}); 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const razor = document.getElementById("razor")
+    if (razor){
+        razor.addEventListener("click", function(event){
+            search("razorArr")
+            window.location.href = "marketplace.html";
+        });   
+    }
+}); 
+
+document.addEventListener("DOMContentLoaded", function() {
     const renter = document.getElementById("rent")
     if (renter){
         renter.addEventListener("click", function(event){
@@ -45,6 +65,28 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
                 localStorage.setItem("jetSkiArr", JSON.stringify(myList));
+                window.location.href = "VehicleAdded.html";
+                showAlert("You Rented a Vehicle!")
+            }
+            if (object.vehicleType == "snowmobile"){
+                let myList = JSON.parse(localStorage.getItem("snowmobileArr"))
+                for (let i = 0; i < myList.length; i++){
+                    if (myList[i].name == object.name){
+                        myList[i] = object;
+                    }
+                }
+                localStorage.setItem("snowmobileArr", JSON.stringify(myList));
+                window.location.href = "VehicleAdded.html";
+                showAlert("You Rented a Vehicle!")
+            }
+            if (object.vehicleType == "razor"){
+                let myList = JSON.parse(localStorage.getItem("razorArr"))
+                for (let i = 0; i < myList.length; i++){
+                    if (myList[i].name == object.name){
+                        myList[i] = object;
+                    }
+                }
+                localStorage.setItem("razorArr", JSON.stringify(myList));
                 window.location.href = "VehicleAdded.html";
                 showAlert("You Rented a Vehicle!")
             }
@@ -93,7 +135,54 @@ function fakeData(){
         }
         const jsonJetSkiString = JSON.stringify(fakeJetSkiList)
         localStorage.setItem("jetSkiArr", jsonJetSkiString);
+
+        vehicleTypes = ["snowmobile", "snowmobile", "snowmobile", "snowmobile", "snowmobile"]
+        names = ["fun", "funner", "funest", "funester", "funestest"]
+        pricesDay = ["100", "110", "120", "130", "140"]
+        pricesHour = ["30", "35", "40", "45","50"]
+        makes = ["Arctic Cat", "skidoo", "skidoo", "polaris", "yamaha"]
+        models = ["sleder", "super slick", "fasttrack", "bouncer", "rider"]
+        images = [
+            "https://sleddermag.com/wp-content/uploads/2019/10/Arctic-Cat-2021-Featured-M8000_165_AlphaOne_Manual_MY21_Red-Char-copy.jpg",
+            "https://www.snowmobile.com/blog/wp-content/uploads/2019/02/2020-Arctic-Cat-Riot-Powder.jpg",
+            "https://cdnmedia.endeavorsuite.com/images/organizations/500699a5-3936-419f-b038-df6b18e6e660/arctic%20cat%20snow/mountainvalley_arcticcatHR.jpg?v=1508161655792",
+            "https://squidex-rsp.ari.production.ldv-svcs.live/api/assets/3dd1d843-73db-43d6-adb3-ff7f351f3018",
+            "https://robbreport.com/wp-content/uploads/2020/01/hardcore_alphaone_hypergreen_my20_201812_arcticcat_reshoot_0121_ka.jpg?w=681&h=383&crop=1"
+        ]
+        let fakeSnowmobileList= [];
+        for (let i = 0; i < 5; i++){
+            myVehicle = new Vehicle(vehicleTypes[i], names[i], pricesDay[i], pricesHour[i], makes[i], models[i], "this long description is short", images[i])
+            // const jsonString = JSON.stringify(myVehicle)
+            // fakeJetSkiList.push(jsonString);
+            fakeSnowmobileList.push(myVehicle)
+        }
+        const jsonSnowmobileString = JSON.stringify(fakeSnowmobileList)
+        localStorage.setItem("snowmobileArr", jsonSnowmobileString);
+
+
+
+        vehicleTypes = ["razor", "razor", "razor", "razor", "razor"]
+        names = ["fun", "funner", "funest", "funester", "funestest"]
+        pricesDay = ["100", "110", "120", "130", "140"]
+        pricesHour = ["30", "35", "40", "45","50"]
+        makes = ["RazArctic Cat", "Razskidoo", "skidoo", "polaris", "yamaha"]
+        models = ["sleder", "super slick", "fasttrack", "bouncer", "rider"]
+        images = [
+            "https://www.teamfasmotorsports.com/cdn-cgi/image/quality%3D85/assets/images/polaris_rzr1k4_aluminum_roof_2a.jpeg",
+            "https://i.pinimg.com/originals/95/5b/fb/955bfb13e33dbc84f4de0048804da6e5.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzSipgp4BsWR6VKNgob_DPSqAirTzqOFMx9Q&usqp=CAU",
+            "https://cdn1.polaris.com/globalassets/rzr/2024/model/vehicle-cards/rzr-xp-4-1000-ultimate-my24-b6c9-matte-titanium-z24nmf99am.png?v=b9f883f5",
+            "https://www.wintersrec.com/wp-content/uploads/2024/01/20240103_150756-TRADE-IN-1600-Black-2018-Polaris-RZR-900-EFI-ATV-for-Sale.jpg"
+        ]
+        let fakeRazorList= [];
+        for (let i = 0; i < 5; i++){
+            myVehicle = new Vehicle(vehicleTypes[i], names[i], pricesDay[i], pricesHour[i], makes[i], models[i], "this long description is short", images[i])
+            fakeRazorList.push(myVehicle)
+        }
+        const jsonRazorString = JSON.stringify(fakeRazorList)
+        localStorage.setItem("razorArr", jsonRazorString);
         localStorage.setItem("fakeIndicator", "true");
+
     }
 };
 
@@ -102,30 +191,6 @@ fakeData();
 
 function search(VT){
     console.log("reached search")
-    // localStorage.setItem("queryResults", localStorage.getItem(VT));
-
-
-    // localQueryResults = localStorage.getItem("queryResults");
-    // myList = JSON.parse(localStorage.getItem(VT))
-
-    // // data = localStorage.getItem(VT)
-    // for (let i = 0; i < myList.length; i++){
-    //     jsonObject = JSON.parse(myList[i]);
-    //     const tempVehicle = new Vehicle(jsonObject.vehicleType, jsonObject.name, jsonObject.priceDay, jsonObject.priceHour, jsonObject.make, jsonObject.model, jsonObject.description, jsonObject.image, jsonObject.rented)
-    //     myVehicleDA.queryResults.push(tempVehicle)
-
-    //     // try {
-    //     //     vehicleData = JSON.parse(value)
-    //     //     if (vehicleData.vehicleType && vehicleData.vehicleType == VT){
-    //     //         myVehicleDA.queryResults.push(value);
-    //     //     }
-    //     // }
-    //     // catch {
-    //     //     continue;
-    //     // }
-    // }  
-
-
     let retList = [];
     vehicleList = JSON.parse(localStorage.getItem(VT))
     for (let i = 0; i < vehicleList.length; i++){
@@ -232,6 +297,20 @@ function addNewVehicle(){
         localStorage.setItem("jetSkiArr", JSON.stringify(jetSkiArr)); 
         window.location.href = "VehicleAdded.html";
     }    
+    if (vehicleTypeEl.value == "snowmobile") { 
+        snowmobileArr = JSON.parse(localStorage.getItem("snowmobileArr"));
+        // jetSkiArr.push(JSON.stringify(newVehicle));
+        snowmobileArr.push(newVehicle);
+        localStorage.setItem("snowmobileArr", JSON.stringify(snowmobileArr)); 
+        window.location.href = "VehicleAdded.html";
+    }    
+    if (vehicleTypeEl.value == "razor") { 
+        razorArr = JSON.parse(localStorage.getItem("razorArr"));
+        // jetSkiArr.push(JSON.stringify(newVehicle));
+        razorArr.push(newVehicle);
+        localStorage.setItem("razorArr", JSON.stringify(razorArr)); 
+        window.location.href = "VehicleAdded.html";
+    }  
 }
 
 
@@ -255,6 +334,6 @@ function showAlert(message) {
   }
 
 //simulate realtiem alerts that will come in with WebSocket
-setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 10000);
+setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 5000);
 
 

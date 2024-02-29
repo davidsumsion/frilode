@@ -60,5 +60,5 @@ For this deliverable I implemented by JavaScript so that the application works f
 
 - **login** - When you press enter or the login button it takes you to the query page.
 -**database** - Displayed the pictures and vehicles. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
--**WebSocket** -
--**application logic** - The vehicles change by what data is uploaded from the user.
+-**WebSocket** - I put an alert every 5 seconds on the top of the page that says someone rented a vehicle. This will show real time when someone clicks book now in the future. For now it's only a base holder
+-**application logic** - The vehicles change by what data is uploaded from the user and don't show after query on search when booked.

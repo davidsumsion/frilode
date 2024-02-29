@@ -13,7 +13,7 @@
     <body>
         <!-- Use header, main, and footer elements to give semantic structure -->
         <div class="othercontainer">
-          <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+          <header id="myHeader" class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
 
             <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
             <h1 style="padding-left: 25px;">frilode</h1>
@@ -61,8 +61,8 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="vehicleTypeButton">
               <li><a class="dropdown-item" id="jetSki">Jet Ski</a></li>
-              <li><a class="dropdown-item" onclick="search('snowmobile')">Snowmobile</a></li>
-              <li><a class="dropdown-item" onclick="search('razor')">Razor</a></li>
+              <li><a class="dropdown-item" id="snowmobile">Snowmobile</a></li>
+              <li><a class="dropdown-item" id="razor">Razor</a></li>
             </ul>
           </div>
           <br />
