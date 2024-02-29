@@ -174,7 +174,7 @@ function addNewVehicle(){
     const descriptionEl = document.querySelector("#description");
     const imageEl = document.querySelector("#imageUpload");
     let newVehicle = new Vehicle(vehicleTypeEl.value, nameEl.value, priceDayEl.value, priceHourEl.value, makeEl.value, modelEl.value, descriptionEl.value, "");
-    localStorage.setItem(newVehicle.getName(), newVehicle);
+    localStorage.setItem(newVehicle.getName(), JSON.stringify(newVehicle));
     window.location.href = "VehicleAdded.html";
 }
 
