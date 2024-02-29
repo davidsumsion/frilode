@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
                 localStorage.setItem("jetSkiArr", JSON.stringify(myList));
+                window.location.href = "VehicleAdded.html";
+                showAlert("You Rented a Vehicle!")
             }
         });   
     }
@@ -231,3 +233,28 @@ function addNewVehicle(){
         window.location.href = "VehicleAdded.html";
     }    
 }
+
+
+function showAlert(message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.classList.add('alert', 'alert-primary', 'alert-dismissible', 'fade', 'show');
+    alertDiv.setAttribute('role', 'alert');
+  
+    alertDiv.textContent = message;
+  
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('btn-close');
+    closeButton.setAttribute('type', 'button');
+    closeButton.setAttribute('data-bs-dismiss', 'alert');
+    closeButton.setAttribute('aria-label', 'Close');
+  
+    alertDiv.appendChild(closeButton);
+
+    var myHeader = document.getElementById("myHeader");
+    myHeader.appendChild(alertDiv);
+  }
+
+//simulate realtiem alerts that will come in with WebSocket
+setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 10000);
+
+
