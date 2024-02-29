@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 
 //change queryResults to grab the vehicle they clicked on
 async function displayVehicle(name){
-    vehicle =JSON.parse(localStorage.getItem("selectedVehicle"));
+    vehicle = JSON.parse(localStorage.getItem("selectedVehicle"));
     document.querySelector('#descriptivetitle').textContent = vehicle.name;
     document.querySelector('#specImg').src = vehicle.image;
     document.querySelector("#specTitle").textContent = vehicle.name;
@@ -265,7 +265,7 @@ async function finishedCards() {
         div.appendChild(moreInfo);
         // moreInfo.class = "btn btn-primary btn-sm";
 
-        moreInfo.addEventListener("click", function(){
+        moreInfo.addEventListener("click", async function(){
             localStorage.setItem("selectedVehicle", JSON.stringify(tempVehicle));
             window.location.href = "exampleVehicle.html";
         })
