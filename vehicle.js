@@ -35,9 +35,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const renter = document.getElementById("rent")
     if (renter){
         renter.addEventListener("click", function(event){
-            localStorage.getItem("selectedVehicle");
-            search("jetSkiArr")
-            window.location.href = "marketplace.html";
+            var object = JSON.parse(localStorage.getItem("selectedVehicle"));
+            object.rented = true;
+            if (object.vehicleType == "jetSki"){
+                let myList = JSON.parse(localStorage.getItem("jetSkiArr"))
+                for (let i = 0; i < myList.length; i++){
+                    if (myList[i].name == object.name){
+                        myList[i] = object;
+                    }
+                }
+                localStorage.setItem("jetSkiArr", JSON.stringify(myList));
+            }
         });   
     }
 }); 
@@ -85,14 +93,17 @@ function fakeData(){
         localStorage.setItem("jetSkiArr", jsonJetSkiString);
         localStorage.setItem("fakeIndicator", "true");
     }
-  };
+};
+
 fakeData();
 
 
 function search(VT){
     console.log("reached search")
+    // localStorage.setItem("queryResults", localStorage.getItem(VT));
+
+
     // localQueryResults = localStorage.getItem("queryResults");
-    localStorage.setItem("queryResults", localStorage.getItem(VT));
     // myList = JSON.parse(localStorage.getItem(VT))
 
     // // data = localStorage.getItem(VT)
@@ -111,6 +122,16 @@ function search(VT){
     //     //     continue;
     //     // }
     // }  
+
+
+    let retList = [];
+    vehicleList = JSON.parse(localStorage.getItem(VT))
+    for (let i = 0; i < vehicleList.length; i++){
+        if(vehicleList[i].rented != true){
+            retList.push(vehicleList[i]);
+        }
+    }
+    localStorage.setItem("queryResults", JSON.stringify(retList))
 };
 
 
