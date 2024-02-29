@@ -21,40 +21,40 @@ class Vehicle {
 
 const dropDownMenu = document.getElementById("vehicleTypeButton")
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const jetSki = document.getElementById("jetSki")
     if (jetSki){
-        jetSki.addEventListener("click", function(event){
-            search("jetSkiArr")
+        jetSki.addEventListener("click", async function(event){
+            await search("jetSkiArr")
             window.location.href = "marketplace.html";
         });   
     }
 }); 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const snowmobile = document.getElementById("snowmobile")
     if (snowmobile){
-        snowmobile.addEventListener("click", function(event){
-            search("snowmobileArr")
+        snowmobile.addEventListener("click", async function(event){
+            await search("snowmobileArr")
             window.location.href = "marketplace.html";
         });   
     }
 }); 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const razor = document.getElementById("razor")
     if (razor){
-        razor.addEventListener("click", function(event){
-            search("razorArr")
+        razor.addEventListener("click", async function(event){
+            await search("razorArr")
             window.location.href = "marketplace.html";
         });   
     }
 }); 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const renter = document.getElementById("rent")
     if (renter){
-        renter.addEventListener("click", function(event){
+        renter.addEventListener("click", async function(){
             var object = JSON.parse(localStorage.getItem("selectedVehicle"));
             object.rented = true;
             if (object.vehicleType == "jetSki"){
@@ -189,7 +189,7 @@ function fakeData(){
 fakeData();
 
 
-function search(VT){
+async function search(VT){
     console.log("reached search")
     let retList = [];
     vehicleList = JSON.parse(localStorage.getItem(VT))
@@ -202,24 +202,24 @@ function search(VT){
 };
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     var container = document.querySelector(".containerMarketplace");
     if(container) {
-        finishedCards();
+        await finishedCards();
     }
 });
 
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", async function(){
     var descriptive = document.querySelector("#descriptivetitle");
     if(descriptive) {
-        displayVehicle();
+        await displayVehicle();
     }
 });
 
 
 //change queryResults to grab the vehicle they clicked on
-function displayVehicle(name){
+async function displayVehicle(name){
     vehicle =JSON.parse(localStorage.getItem("selectedVehicle"));
     document.querySelector('#descriptivetitle').textContent = vehicle.name;
     document.querySelector('#specImg').src = vehicle.image;
@@ -229,7 +229,7 @@ function displayVehicle(name){
 }
 
 
-function finishedCards() {
+async function finishedCards() {
     // data = myVehicleDA.queryResults;
     data = JSON.parse(localStorage.getItem("queryResults"))
     for (let i = 0; i < data.length; i++){
