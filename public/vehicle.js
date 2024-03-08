@@ -95,6 +95,33 @@ document.addEventListener("DOMContentLoaded", async function() {
 }); 
 
 
+
+//LOAD VEHICLES
+//Load Jetskis
+async function loadJetSKi() {
+    let jetSkiList = [];
+    try {
+      // Get the latest JetSki List from the service
+      const response = await fetch('/api/jetSki');
+      jetSkiList = await response.json();
+  
+      // Save the scores in case we go offline in the future
+      localStorage.setItem('jetSkiArr', JSON.stringify(jetSkiList));
+    } catch {
+      // If there was an error then just use the last saved scores
+      const jetSkiArrText = localStorage.getItem('jetSkiArr');
+      if (jetSkiArrText) {
+        jetSkiList = JSON.parse(jetSkiArrText);
+      }
+    }
+    //displayJetSKi(scores);
+    // displayScores(scores);
+  }
+
+
+
+
+
 class VehicleDA {
     constructor(){
         //NEED VEHICLE TYPE HERE
@@ -109,6 +136,10 @@ class VehicleDA {
 }
 
 let myVehicleDA = new VehicleDA();
+
+
+
+
 
 
 function fakeData(){
@@ -228,6 +259,12 @@ async function displayVehicle(name){
     document.querySelector("#longDescription").textContent = vehicle.description;
 }
 
+async function delayExecution() {
+    setTimeout( async function() {
+      console.log("This function took 3 seconds to run.");
+    }, 3000); 
+  }
+
 
 async function finishedCards() {
     // data = myVehicleDA.queryResults;
@@ -267,6 +304,7 @@ async function finishedCards() {
 
         moreInfo.addEventListener("click", async function(){
             localStorage.setItem("selectedVehicle", JSON.stringify(tempVehicle));
+            await delayExecution();
             window.location.href = "exampleVehicle.html";
         })
 
