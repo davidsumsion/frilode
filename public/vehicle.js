@@ -58,6 +58,14 @@ document.addEventListener("DOMContentLoaded", async function() {
             var object = JSON.parse(localStorage.getItem("selectedVehicle"));
             object.rented = true;
             if (object.vehicleType == "jetSki"){
+
+
+
+
+
+
+
+                
                 let myList = JSON.parse(localStorage.getItem("jetSkiArr"))
                 for (let i = 0; i < myList.length; i++){
                     if (myList[i].name == object.name){
@@ -350,7 +358,7 @@ async function finishedCards() {
 }
 
 
-function addNewVehicle(){
+async function addNewVehicle(){
     const nameEl = document.querySelector("#name");
     const vehicleTypeEl = document.querySelector("#vehicleType");
     const priceDayEl = document.querySelector("#PriceDay");
@@ -361,25 +369,47 @@ function addNewVehicle(){
     const imageEl = document.querySelector("#imageUpload");
     let newVehicle = new Vehicle(vehicleTypeEl.value, nameEl.value, priceDayEl.value, priceHourEl.value, makeEl.value, modelEl.value, descriptionEl.value, "");
     if (vehicleTypeEl.value == "jetSki") { 
-        jetSkiArr = JSON.parse(localStorage.getItem("jetSkiArr"));
-        // jetSkiArr.push(JSON.stringify(newVehicle));
-        jetSkiArr.push(newVehicle);
-        localStorage.setItem("jetSkiArr", JSON.stringify(jetSkiArr)); 
-        window.location.href = "VehicleAdded.html";
+        // jetSkiArr = JSON.parse(localStorage.getItem("jetSkiArr"));
+        // // jetSkiArr.push(JSON.stringify(newVehicle));
+        // jetSkiArr.push(newVehicle);
+        // localStorage.setItem("jetSkiArr", JSON.stringify(jetSkiArr)); 
+        // window.location.href = "VehicleAdded.html";
+        const jsonJetSkiString = JSON.stringify(newVehicle)
+        const response = await fetch('/api/jetSki', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: jsonJetSkiString,
+        });
+        const jetSkis = await response.json();
     }    
     if (vehicleTypeEl.value == "snowmobile") { 
-        snowmobileArr = JSON.parse(localStorage.getItem("snowmobileArr"));
-        // jetSkiArr.push(JSON.stringify(newVehicle));
-        snowmobileArr.push(newVehicle);
-        localStorage.setItem("snowmobileArr", JSON.stringify(snowmobileArr)); 
-        window.location.href = "VehicleAdded.html";
+        // snowmobileArr = JSON.parse(localStorage.getItem("snowmobileArr"));
+        // // jetSkiArr.push(JSON.stringify(newVehicle));
+        // snowmobileArr.push(newVehicle);
+        // localStorage.setItem("snowmobileArr", JSON.stringify(snowmobileArr)); 
+        // window.location.href = "VehicleAdded.html";
+        const jsonSnowmobileString = JSON.stringify(newVehicle)
+        const response = await fetch('/api/snowmobile', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: jsonSnowmobileString,
+        });
+        const jetSkis = await response.json();
     }    
     if (vehicleTypeEl.value == "razor") { 
-        razorArr = JSON.parse(localStorage.getItem("razorArr"));
-        // jetSkiArr.push(JSON.stringify(newVehicle));
-        razorArr.push(newVehicle);
-        localStorage.setItem("razorArr", JSON.stringify(razorArr)); 
-        window.location.href = "VehicleAdded.html";
+        // razorArr = JSON.parse(localStorage.getItem("razorArr"));
+        // // jetSkiArr.push(JSON.stringify(newVehicle));
+        // razorArr.push(newVehicle);
+        // localStorage.setItem("razorArr", JSON.stringify(razorArr)); 
+        // window.location.href = "VehicleAdded.html";
+        const jsonString = JSON.stringify(newVehicle)
+        const response = await fetch('/api/razor', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: jsonString,
+        });
+        const jetSkis = await response.json();
+
     }  
 }
 
