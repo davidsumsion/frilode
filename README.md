@@ -62,3 +62,12 @@ For this deliverable I implemented by JavaScript so that the application works f
 -**database** - Displayed the pictures and vehicles. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
 -**WebSocket** - I put an alert every 5 seconds on the top of the page that says someone rented a vehicle. This will show real time when someone clicks book now in the future. For now it's only a base holder
 -**application logic** - The vehicles change by what data is uploaded from the user and don't show after query on search when booked.
+
+
+## Service deliverable
+For this deliverable I implemented by JavaScript so that the application works for a single user. I also added placeholders for future technology.
+
+-**Node.js/Express HTTP service** - done
+-**Static middleware for frontend** - done
+-**Backend service endpoints** - 9 endpoints added for getting all of a vehicle, setting a specefic vehicle, and setting an entire vehicle list
+-**Frontend calls service endpoints** - I did this using the fetch function.
