@@ -142,7 +142,7 @@ let myVehicleDA = new VehicleDA();
 
 
 
-function fakeData(){
+async function fakeData(){
     if (!localStorage.getItem("fakeIndicator") || localStorage.getItem("fakeIndicator") == "false"){
         let vehicleTypes = ["jetSki", "jetSki", "jetSki", "jetSki", "jetSki"]
         let names = ["fun", "funner", "funest", "funester", "funestest"]
@@ -160,12 +160,15 @@ function fakeData(){
         let fakeJetSkiList = [];
         for (let i = 0; i < 5; i++){
             myVehicle = new Vehicle(vehicleTypes[i], names[i], pricesDay[i], pricesHour[i], makes[i], models[i], "this long description is short", images[i])
-            // const jsonString = JSON.stringify(myVehicle)
-            // fakeJetSkiList.push(jsonString);
-            fakeJetSkiList.push(myVehicle)
+            const jsonJetSkiString = JSON.stringify(myVehicle)
+            const response = await fetch('/api/jetSki', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: jsonJetSkiString,
+            });
+            const jetSkis = await response.json();
         }
-        const jsonJetSkiString = JSON.stringify(fakeJetSkiList)
-        localStorage.setItem("jetSkiArr", jsonJetSkiString);
+
 
         vehicleTypes = ["snowmobile", "snowmobile", "snowmobile", "snowmobile", "snowmobile"]
         names = ["fun", "funner", "funest", "funester", "funestest"]

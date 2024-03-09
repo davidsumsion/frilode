@@ -19,6 +19,13 @@ apiRouter.get('/jetSki', (_req, res) => {
     res.send(jetSki);
   });
 
+// SubmitVehicle
+apiRouter.post('/jetSki', (req, res) => {
+    console.log(req.body);
+    jetSki.push(req.body);
+    res.send(jetSki);
+    });
+
 
 
 // GetScores
@@ -32,14 +39,22 @@ apiRouter.get('/jetSki', (_req, res) => {
 //   res.send(scores);
 // });
 
-// // Return the application's default page if the path is unknown
-// app.use((_req, res) => {
-//   res.sendFile('index.html', { root: 'public' });
-// });
 
-// app.listen(port, () => {
-//   console.log(`Listening on port ${port}`);
-// });
+
+
+
+
+
+let jetSki = []
+//needs to be below getters and setters
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
 
 // // updateScores considers a new score for inclusion in the high scores.
 // // The high scores are saved in memory and disappear whenever the service is restarted.
