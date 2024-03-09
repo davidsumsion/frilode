@@ -82,28 +82,52 @@ document.addEventListener("DOMContentLoaded", async function() {
                 showAlert("You Rented a Vehicle!")
             }
             if (object.vehicleType == "snowmobile"){
-
-
-
-
-                let myList = JSON.parse(localStorage.getItem("snowmobileArr"))
+                const response = await fetch('/api/snowmobile', {
+                    method: 'GET',
+                    headers: {'content-type': 'application/json'}
+                });
+                let myList = await response.json();
+                // let myList = JSON.parse(localStorage.getItem("snowmobileArr"))
                 for (let i = 0; i < myList.length; i++){
                     if (myList[i].name == object.name){
                         myList[i] = object;
                     }
                 }
-                localStorage.setItem("snowmobileArr", JSON.stringify(myList));
+
+                const vehicleStringList = JSON.stringify(myList)
+                const response2 = await fetch('/api/snowmobileList', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: vehicleStringList,
+                });
+                const vehicleString = await response2.json();
+
+                // localStorage.setItem("snowmobileArr", JSON.stringify(myList));
                 window.location.href = "VehicleAdded.html";
                 showAlert("You Rented a Vehicle!")
             }
             if (object.vehicleType == "razor"){
-                let myList = JSON.parse(localStorage.getItem("razorArr"))
+                const response = await fetch('/api/razor', {
+                    method: 'GET',
+                    headers: {'content-type': 'application/json'}
+                });
+                let myList = await response.json();
+
+                // let myList = JSON.parse(localStorage.getItem("razorArr"))
                 for (let i = 0; i < myList.length; i++){
                     if (myList[i].name == object.name){
                         myList[i] = object;
                     }
                 }
-                localStorage.setItem("razorArr", JSON.stringify(myList));
+                const vehicleStringList = JSON.stringify(myList)
+                const response2 = await fetch('/api/razorList', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: vehicleStringList,
+                });
+                const vehicleString = await response2.json();
+
+                // localStorage.setItem("razorArr", JSON.stringify(myList));
                 window.location.href = "VehicleAdded.html";
                 showAlert("You Rented a Vehicle!")
             }

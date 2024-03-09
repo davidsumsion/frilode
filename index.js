@@ -45,6 +45,13 @@ apiRouter.post('/snowmobile', (req, res) => {
     res.send(snowmobileList);
     });
 
+    // SubmitSnowmobile
+apiRouter.post('/snowmobileList', (req, res) => {
+    console.log(req.body);
+    snowmobileList = req.body
+    res.send(snowmobileList);
+});
+
 
 // GetRazor
 apiRouter.get('/razor', (_req, res) => {
@@ -58,6 +65,12 @@ apiRouter.post('/razor', (req, res) => {
     res.send(razorList);
     });
 
+// SubmitSnowmobile
+apiRouter.post('/razorList', (req, res) => {
+    console.log(req.body);
+    razorList = req.body
+    res.send(razorList);
+});
 
 // GetScores
 // apiRouter.get('/scores', (_req, res) => {
