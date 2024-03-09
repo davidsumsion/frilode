@@ -58,25 +58,34 @@ document.addEventListener("DOMContentLoaded", async function() {
             var object = JSON.parse(localStorage.getItem("selectedVehicle"));
             object.rented = true;
             if (object.vehicleType == "jetSki"){
-
-
-
-
-
-
-
-                
-                let myList = JSON.parse(localStorage.getItem("jetSkiArr"))
+                const response = await fetch('/api/jetSki', {
+                    method: 'GET',
+                    headers: {'content-type': 'application/json'}
+                });
+                let myList = await response.json();
+                // let myList = JSON.parse(localStorage.getItem("jetSkiArr"))
                 for (let i = 0; i < myList.length; i++){
                     if (myList[i].name == object.name){
                         myList[i] = object;
                     }
                 }
-                localStorage.setItem("jetSkiArr", JSON.stringify(myList));
+                
+                const jsonJetSkiListString = JSON.stringify(myList)
+                const response2 = await fetch('/api/jetSkiList', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: jsonJetSkiListString,
+                });
+                const jetSkis = await response2.json();
+                // localStorage.setItem("jetSkiArr", JSON.stringify(myList));
                 window.location.href = "VehicleAdded.html";
                 showAlert("You Rented a Vehicle!")
             }
             if (object.vehicleType == "snowmobile"){
+
+
+
+
                 let myList = JSON.parse(localStorage.getItem("snowmobileArr"))
                 for (let i = 0; i < myList.length; i++){
                     if (myList[i].name == object.name){

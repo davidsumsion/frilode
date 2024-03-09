@@ -24,8 +24,14 @@ apiRouter.post('/jetSki', (req, res) => {
     console.log(req.body);
     jetSkiList.push(req.body);
     res.send(jetSkiList);
-    });
+});
 
+// SubmitJetSki
+apiRouter.post('/jetSkiList', (req, res) => {
+    console.log(req.body);
+    jetSkiList = req.body
+    res.send(jetSkiList);
+});
 
 // GetSnowmobiles
 apiRouter.get('/snowmobile', (_req, res) => {
