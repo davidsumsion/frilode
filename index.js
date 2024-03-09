@@ -14,18 +14,43 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// GetVehicles
+// GetJetSkis
 apiRouter.get('/jetSki', (_req, res) => {
-    res.send(jetSki);
+    res.send(jetSkiList);
   });
 
-// SubmitVehicle
+// SubmitJetSki
 apiRouter.post('/jetSki', (req, res) => {
     console.log(req.body);
-    jetSki.push(req.body);
-    res.send(jetSki);
+    jetSkiList.push(req.body);
+    res.send(jetSkiList);
     });
 
+
+// GetSnowmobiles
+apiRouter.get('/snowmobile', (_req, res) => {
+    res.send(snowmobileList);
+  });
+
+// SubmitSnowmobile
+apiRouter.post('/snowmobile', (req, res) => {
+    console.log(req.body);
+    snowmobileList.push(req.body);
+    res.send(snowmobileList);
+    });
+
+
+// GetRazor
+apiRouter.get('/razor', (_req, res) => {
+    res.send(razorList);
+  });
+
+// SubmitRazor
+apiRouter.post('/razor', (req, res) => {
+    console.log(req.body);
+    razorList.push(req.body);
+    res.send(razorList);
+    });
 
 
 // GetScores
@@ -44,8 +69,9 @@ apiRouter.post('/jetSki', (req, res) => {
 
 
 
-
-let jetSki = []
+let snowmobileList = []
+let jetSkiList = []
+let razorList = []
 //needs to be below getters and setters
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {

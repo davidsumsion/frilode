@@ -122,24 +122,6 @@ async function loadJetSKi() {
 
 
 
-class VehicleDA {
-    constructor(){
-        //NEED VEHICLE TYPE HERE
-        // this.queryResults = [];
-        // localStorage.setItem("queryResults", "[]")
-        // localStorage.setItem("jetSkiArr", "[]");
-        // localStorage.setItem("snowmobileArr", "[]");
-        // localStorage.setItem("razorArr", "[]");
-    }
-
-    putVehicle(vehicle){ localStorage.setItem(vehicle.name, vehicle) }
-}
-
-let myVehicleDA = new VehicleDA();
-
-
-
-
 
 
 async function fakeData(){
@@ -157,7 +139,6 @@ async function fakeData(){
             "https://img.redbull.com/images/c_crop,w_3200,h_1600,x_0,y_461,f_auto,q_auto/c_scale,w_1200/redbullcom/2021/3/21/czbeu7fszcxtqbiozvbk/history-of-jet-ski",
             "https://www.h2ocraft.com/wp-content/uploads/2019/12/jet-766192_1280.jpg"
         ]
-        let fakeJetSkiList = [];
         for (let i = 0; i < 5; i++){
             myVehicle = new Vehicle(vehicleTypes[i], names[i], pricesDay[i], pricesHour[i], makes[i], models[i], "this long description is short", images[i])
             const jsonJetSkiString = JSON.stringify(myVehicle)
@@ -183,15 +164,30 @@ async function fakeData(){
             "https://squidex-rsp.ari.production.ldv-svcs.live/api/assets/3dd1d843-73db-43d6-adb3-ff7f351f3018",
             "https://robbreport.com/wp-content/uploads/2020/01/hardcore_alphaone_hypergreen_my20_201812_arcticcat_reshoot_0121_ka.jpg?w=681&h=383&crop=1"
         ]
-        let fakeSnowmobileList= [];
+        // let fakeSnowmobileList= [];
         for (let i = 0; i < 5; i++){
             myVehicle = new Vehicle(vehicleTypes[i], names[i], pricesDay[i], pricesHour[i], makes[i], models[i], "this long description is short", images[i])
+            const jsonSnowmobileString = JSON.stringify(myVehicle)
+            const response = await fetch('/api/snowmobile', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: jsonSnowmobileString,
+            });
+            const jetSkis = await response.json();
+
             // const jsonString = JSON.stringify(myVehicle)
             // fakeJetSkiList.push(jsonString);
-            fakeSnowmobileList.push(myVehicle)
+            // fakeSnowmobileList.push(myVehicle)
+            // const jsonString = JSON.stringify(myVehicle)
+            // const response = await fetch('/api/snowmobile', {
+            //     method: 'POST',
+            //     headers: {'content-type': 'application/json'},
+            //     body: jsonString,
+            // });
+            // const jetSkis = await response.json();
         }
-        const jsonSnowmobileString = JSON.stringify(fakeSnowmobileList)
-        localStorage.setItem("snowmobileArr", jsonSnowmobileString);
+        // const jsonSnowmobileString = JSON.stringify(fakeSnowmobileList)
+        // localStorage.setItem("snowmobileArr", jsonSnowmobileString);
 
 
 
@@ -208,13 +204,20 @@ async function fakeData(){
             "https://cdn1.polaris.com/globalassets/rzr/2024/model/vehicle-cards/rzr-xp-4-1000-ultimate-my24-b6c9-matte-titanium-z24nmf99am.png?v=b9f883f5",
             "https://www.wintersrec.com/wp-content/uploads/2024/01/20240103_150756-TRADE-IN-1600-Black-2018-Polaris-RZR-900-EFI-ATV-for-Sale.jpg"
         ]
-        let fakeRazorList= [];
+        // let fakeRazorList= [];
         for (let i = 0; i < 5; i++){
             myVehicle = new Vehicle(vehicleTypes[i], names[i], pricesDay[i], pricesHour[i], makes[i], models[i], "this long description is short", images[i])
-            fakeRazorList.push(myVehicle)
+            // fakeRazorList.push(myVehicle)
+            const jsonString = JSON.stringify(myVehicle)
+            const response = await fetch('/api/razor', {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: jsonString,
+            });
+            // const razors = await response.json();
         }
-        const jsonRazorString = JSON.stringify(fakeRazorList)
-        localStorage.setItem("razorArr", jsonRazorString);
+        // const jsonRazorString = JSON.stringify(fakeRazorList)
+        // localStorage.setItem("razorArr", jsonRazorString);
         localStorage.setItem("fakeIndicator", "true");
 
     }
@@ -225,8 +228,35 @@ fakeData();
 
 async function search(VT){
     console.log("reached search")
+    var vehicleList = [];
+
+    if (VT === "jetSkiArr") {
+        const response = await fetch('/api/jetSki', {
+            method: 'GET',
+            headers: {'content-type': 'application/json'}
+        });
+        vehicleList = await response.json();
+    }
+
+    if (VT === "snowmobileArr") {
+        const response = await fetch('/api/snowmobile', {
+            method: 'GET',
+            headers: {'content-type': 'application/json'}
+        });
+        vehicleList = await response.json();
+    }
+
+    if (VT === "razorArr") {
+        const response = await fetch('/api/razor', {
+            method: 'GET',
+            headers: {'content-type': 'application/json'}
+        });
+        vehicleList = await response.json();
+    }
+
+
+
     let retList = [];
-    vehicleList = JSON.parse(localStorage.getItem(VT))
     for (let i = 0; i < vehicleList.length; i++){
         if(vehicleList[i].rented != true){
             retList.push(vehicleList[i]);
@@ -270,7 +300,6 @@ async function delayExecution() {
 
 
 async function finishedCards() {
-    // data = myVehicleDA.queryResults;
     data = JSON.parse(localStorage.getItem("queryResults"))
     for (let i = 0; i < data.length; i++){
         // jsonObject = JSON.parse(data[i]);
