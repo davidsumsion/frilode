@@ -26,8 +26,8 @@
   }
   
   async function loginOrCreate(endpoint) {
-    const userName = document.querySelector('#userName')?.value;
-    const password = document.querySelector('#userPassword')?.value;
+    const userName = document.querySelector('#Email')?.value;
+    const password = document.querySelector('#password')?.value;
     const response = await fetch(endpoint, {
       method: 'post',
       body: JSON.stringify({ email: userName, password: password }),
@@ -38,7 +38,7 @@
   
     if (response.ok) {
       localStorage.setItem('userName', userName);
-      window.location.href = 'play.html';
+      window.location.href = "query.html";
     } else {
       const body = await response.json();
       const modalEl = document.querySelector('#msgModal');
@@ -46,6 +46,7 @@
       const msgModal = new bootstrap.Modal(modalEl, {});
       msgModal.show();
     }
+
   }
   
   function play() {

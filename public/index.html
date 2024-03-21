@@ -51,10 +51,23 @@
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Password">
                 </div>
-                <button class="btn btn-primary" onclick="login()">Sign in</button>
+                <button class="btn btn-primary" onclick="loginUser()">Sign in</button>
                 <button class="btn btn-primary" onclick="createUser()">Create Account</button>
               </div>
           </div>
+
+                <!-- Error dialog -->
+            <div class="modal fade" id="msgModal" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-dark">
+                  <div class="modal-body">error message here</div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
         </main>
     
 
