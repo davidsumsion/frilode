@@ -71,3 +71,14 @@ For this deliverable I implemented by JavaScript so that the application works f
 -**Static middleware for frontend** - done
 -**Backend service endpoints** - 9 endpoints added for getting all of a vehicle, setting a specefic vehicle, and setting an entire vehicle list
 -**Frontend calls service endpoints** - I did this using the fetch function.
+
+
+## Login Deliverable
+For this deliverable I implemented the JS to make the application log a user in with my MongoDB.
+
+- **MongoDB Atlas database created** - completed
+- **Stores data in MongoDB** - done!
+- **User registration** - Creates a new account in the database.
+- **existing user** - doesn't allow you to create another user with same name
+- **Use MongoDB to store credentials** - Stores user data
+- **Restricts functionality** - You cannot rent until you have logged in. This is restricted on the frontend only. 

@@ -161,7 +161,17 @@ async function loadJetSKi() {
 
 
 
-
+async function nameDay(){
+    const response = await fetch('https://nameday.abalin.net/api/V1/today?country=es&timezone=Arctic/Longyearbyen', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'country': 'us'
+    }
+    })
+    return response.json();
+}
 
 
 
