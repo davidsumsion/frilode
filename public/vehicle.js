@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", async function() {
         razor.addEventListener("click", async function(event){
             await search("razorArr")
             window.location.href = "marketplace.html";
-        });   
+        });
     }
-}); 
+});
 
 document.addEventListener("DOMContentLoaded", async function() {
     const renter = document.getElementById("rent")

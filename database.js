@@ -57,32 +57,42 @@ async function createUser(email, password) {
   return user;
 }
 
-function createJetSki(jetski) {
-  jetSkiCollection.insertOne(jetski);
+
+function getJetSkis() {
+  return jetSkiCollection.find({}).toArray();
 }
 
-function createSnowmobile(snowmobile) {
-  snowmobileCollection.insertOne(snowmobile);
+function postJetSki(jetSki) {
+  jetSkiCollection.insertOne(jetSki)
+  return jetSkiCollection.find({}).toArray();
 }
 
-function addScore(score) {
-  scoreCollection.insertOne(score);
+function postListJetSkis(jetskilist){
+  jetSkiCollection.deleteMany({})
+  jetSkiCollection.insertMany(jetskilist);
+  return jetSkiCollection.find({}).toArray();
 }
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
-}
+
+// function addScore(score) {
+//   scoreCollection.insertOne(score);
+// }
+
+// function getHighScores() {
+//   const query = { score: { $gt: 0, $lt: 900 } };
+//   const options = {
+//     sort: { score: -1 },
+//     limit: 10,
+//   };
+//   const cursor = scoreCollection.find(query, options);
+//   return cursor.toArray();
+// }
 
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
-  addScore,
-  getHighScores,
+  getJetSkis,
+  postJetSki,
+  postListJetSkis
 };

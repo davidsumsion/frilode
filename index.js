@@ -27,6 +27,15 @@ app.set('trust proxy', true);
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+apiRouter.use(async (req, res, next) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
 
 
 //LOGIN STUFF
@@ -78,20 +87,6 @@ apiRouter.get('/user/:email', async (req, res) => {
   res.status(404).send({ msg: 'Unknown' });
 });
 
-// secureApiRouter verifies credentials for endpoints
-var secureApiRouter = express.Router();
-apiRouter.use(secureApiRouter);
-
-secureApiRouter.use(async (req, res, next) => {
-  authToken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    next();
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
-});
-
 
 
 ////VEHICLES STUFF
@@ -99,23 +94,31 @@ secureApiRouter.use(async (req, res, next) => {
 
 
 // GetJetSkis
-apiRouter.get('/jetSki', (_req, res) => {
-    res.send(jetSkiList);
+apiRouter.get('/jetSki', async (_req, res) => {
+    // res.send(jetSkiList);
+    const jetSkis = await DB.getJetSkis();
+    res.send(jetSkis);
   });
 
 // SubmitJetSki
 apiRouter.post('/jetSki', (req, res) => {
-    console.log(req.body);
-    jetSkiList.push(req.body);
+    const jetSkiList = DB.postJetSki(req.body);
+    // console.log(req.body);
+    // jetSkiList.push(req.body);
     res.send(jetSkiList);
 });
 
-// SubmitJetSki
+// SubmitJetSkiList
 apiRouter.post('/jetSkiList', (req, res) => {
-    console.log(req.body);
-    jetSkiList = req.body
+  const jetSkiList = DB>DB.postListJetSkis(req.body);
+    // console.log(req.body);
+    // jetSkiList = req.body
     res.send(jetSkiList);
 });
+
+
+
+
 
 // GetSnowmobiles
 apiRouter.get('/snowmobile', (_req, res) => {
@@ -156,16 +159,6 @@ apiRouter.post('/razorList', (req, res) => {
     res.send(razorList);
 });
 
-// GetScores
-// apiRouter.get('/scores', (_req, res) => {
-//   res.send(scores);
-// });
-
-// // SubmitScore
-// apiRouter.post('/score', (req, res) => {
-//   scores = updateScores(req.body, scores);
-//   res.send(scores);
-// });
 
 
 // Default error handler
@@ -190,7 +183,7 @@ function setAuthCookie(res, authToken) {
 
 
 let snowmobileList = []
-let jetSkiList = []
+// let jetSkiList = []
 let razorList = []
 //needs to be below getters and setters
 // Return the application's default page if the path is unknown

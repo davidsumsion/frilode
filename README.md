@@ -73,7 +73,7 @@ For this deliverable I implemented by JavaScript so that the application works f
 -**Frontend calls service endpoints** - I did this using the fetch function.
 
 
-## Login Deliverable
+## DB/Login Deliverable
 For this deliverable I implemented the JS to make the application log a user in with my MongoDB.
 
 - **MongoDB Atlas database created** - completed
