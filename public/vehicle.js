@@ -198,7 +198,7 @@ async function fakeData(){
                 headers: {'content-type': 'application/json'},
                 body: jsonJetSkiString,
             });
-            const jetSkis = await response.json();
+            // const jetSkis = await response.json();
         }
 
 
@@ -224,7 +224,7 @@ async function fakeData(){
                 headers: {'content-type': 'application/json'},
                 body: jsonSnowmobileString,
             });
-            const jetSkis = await response.json();
+            // const jetSkis = await response.json();
 
             // const jsonString = JSON.stringify(myVehicle)
             // fakeJetSkiList.push(jsonString);

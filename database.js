@@ -74,6 +74,21 @@ function postListJetSkis(jetskilist){
 }
 
 
+function getJetSkis() {
+  return jetSkiCollection.find({}).toArray();
+}
+
+function postJetSki(jetSki) {
+  jetSkiCollection.insertOne(jetSki)
+  return jetSkiCollection.find({}).toArray();
+}
+
+function postListJetSkis(jetskilist){
+  jetSkiCollection.deleteMany({})
+  jetSkiCollection.insertMany(jetskilist);
+  return jetSkiCollection.find({}).toArray();
+}
+
 // function addScore(score) {
 //   scoreCollection.insertOne(score);
 // }
