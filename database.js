@@ -10,7 +10,10 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('simon');
 const userCollection = db.collection('user');
-const scoreCollection = db.collection('score');
+// const scoreCollection = db.collection('score');
+const jetSkiCollection = db.collection('jetski');
+const snowmobileCollection = db.collection('snowmobile');
+const razorCollection = db.collection('razor');
 
 
 (async function testConnection() {
@@ -52,6 +55,14 @@ async function createUser(email, password) {
   await userCollection.insertOne(user);
 
   return user;
+}
+
+function createJetSki(jetski) {
+  jetSkiCollection.insertOne(jetski);
+}
+
+function createSnowmobile(snowmobile) {
+  snowmobileCollection.insertOne(snowmobile);
 }
 
 function addScore(score) {
