@@ -83,10 +83,25 @@ function postSnowmobile(snowmobile) {
   return snowmobileCollection.find({}).toArray();
 }
 
-function postListSnowmobile(snowmobile){
+function postListSnowmobile(snowmobileList){
   snowmobileCollection.deleteMany({})
-  snowmobileCollection.insertMany(snowmobile);
+  snowmobileCollection.insertMany(snowmobileList);
   return snowmobileCollection.find({}).toArray();
+}
+
+function getRazors() {
+  return razorCollection.find({}).toArray();
+}
+
+function postRazor(razor) {
+  razorCollection.insertOne(razor)
+  return razorCollection.find({}).toArray();
+}
+
+function postListRazor(razorList){
+  razorCollection.deleteMany({})
+  razorCollection.insertMany(razorList);
+  return razorCollection.find({}).toArray();
 }
 
 // function addScore(score) {
@@ -112,5 +127,8 @@ module.exports = {
   postListJetSkis,
   getSnowmobiles,
   postSnowmobile,
-  postListSnowmobile
+  postListSnowmobile,
+  getRazors,
+  postRazor,
+  postListRazor
 };

@@ -110,13 +110,11 @@ apiRouter.post('/jetSki', (req, res) => {
 
 // SubmitJetSkiList
 apiRouter.post('/jetSkiList', (req, res) => {
-  const jetSkiList = DB>DB.postListJetSkis(req.body);
+  const jetSkiList = DB.postListJetSkis(req.body);
     // console.log(req.body);
     // jetSkiList = req.body
     res.send(jetSkiList);
 });
-
-
 
 
 
@@ -149,24 +147,25 @@ apiRouter.post('/snowmobileList', (req, res) => {
 });
 
 
-// GetRazor
+// Get Razor
 apiRouter.get('/razor', (_req, res) => {
-  const razorList = DB.postListRazor(req.body);
-
+    const razorList = DB.getRazors(req.body);
     res.send(razorList);
   });
 
-// SubmitRazor
+// Submit Razor
 apiRouter.post('/razor', (req, res) => {
-    console.log(req.body);
-    razorList.push(req.body);
+  const razorList = DB.postRazor(req.body);
+    // console.log(req.body);
+    // razorList.push(req.body);
     res.send(razorList);
     });
 
-// SubmitSnowmobile
+// Submit Razor List
 apiRouter.post('/razorList', (req, res) => {
-    console.log(req.body);
-    razorList = req.body
+  const razorList = DB.postListRazor(req.body);
+    // console.log(req.body);
+    // razorList = req.body
     res.send(razorList);
 });
 
