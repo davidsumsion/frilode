@@ -74,19 +74,19 @@ function postListJetSkis(jetskilist){
 }
 
 
-function getJetSkis() {
-  return jetSkiCollection.find({}).toArray();
+function getSnowmobiles() {
+  return snowmobileCollection.find({}).toArray();
 }
 
-function postJetSki(jetSki) {
-  jetSkiCollection.insertOne(jetSki)
-  return jetSkiCollection.find({}).toArray();
+function postSnowmobile(snowmobile) {
+  snowmobileCollection.insertOne(snowmobile)
+  return snowmobileCollection.find({}).toArray();
 }
 
-function postListJetSkis(jetskilist){
-  jetSkiCollection.deleteMany({})
-  jetSkiCollection.insertMany(jetskilist);
-  return jetSkiCollection.find({}).toArray();
+function postListSnowmobile(snowmobile){
+  snowmobileCollection.deleteMany({})
+  snowmobileCollection.insertMany(snowmobile);
+  return snowmobileCollection.find({}).toArray();
 }
 
 // function addScore(score) {
@@ -109,5 +109,8 @@ module.exports = {
   createUser,
   getJetSkis,
   postJetSki,
-  postListJetSkis
+  postListJetSkis,
+  getSnowmobiles,
+  postSnowmobile,
+  postListSnowmobile
 };

@@ -121,27 +121,38 @@ apiRouter.post('/jetSkiList', (req, res) => {
 
 
 // GetSnowmobiles
-apiRouter.get('/snowmobile', (_req, res) => {
-    res.send(snowmobileList);
+apiRouter.get('/snowmobile', async (_req, res) => {
+    const snowmobiles = await DB.getSnowmobiles();
+    res.send(snowmobiles);
   });
 
 // SubmitSnowmobile
 apiRouter.post('/snowmobile', (req, res) => {
-    console.log(req.body);
-    snowmobileList.push(req.body);
+    const snowmobileList = DB.postSnowmobile(req.body);
+  // console.log(req.body);
+  // jetSkiList.push(req.body);
+  // res.send(jetSkiList);
+    // console.log(req.body);
+    // snowmobileList.push(req.body);
     res.send(snowmobileList);
     });
 
-    // SubmitSnowmobile
+    // SubmitSnowmobileList
 apiRouter.post('/snowmobileList', (req, res) => {
-    console.log(req.body);
-    snowmobileList = req.body
+    const snowmobileList = DB.postListSnowmobile(req.body);
+    // console.log(req.body);
+    // jetSkiList = req.body
+    // res.send(jetSkiList);
+    // console.log(req.body);
+    // snowmobileList = req.body
     res.send(snowmobileList);
 });
 
 
 // GetRazor
 apiRouter.get('/razor', (_req, res) => {
+  const razorList = DB.postListRazor(req.body);
+
     res.send(razorList);
   });
 
@@ -182,9 +193,9 @@ function setAuthCookie(res, authToken) {
 
 
 
-let snowmobileList = []
+// let snowmobileList = []
 // let jetSkiList = []
-let razorList = []
+// let razorList = []
 //needs to be below getters and setters
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
