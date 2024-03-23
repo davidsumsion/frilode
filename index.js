@@ -148,8 +148,8 @@ apiRouter.post('/snowmobileList', (req, res) => {
 
 
 // Get Razor
-apiRouter.get('/razor', (_req, res) => {
-    const razorList = DB.getRazors(req.body);
+apiRouter.get('/razor', async (_req, res) => {
+    const razorList = await DB.getRazors();
     res.send(razorList);
   });
 
