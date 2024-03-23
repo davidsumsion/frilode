@@ -27,17 +27,6 @@ app.set('trust proxy', true);
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.use(async (req, res, next) => {
-  authToken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    next();
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
-});
-
-
 //LOGIN STUFF
 ////////////
 
@@ -93,15 +82,29 @@ apiRouter.get('/user/:email', async (req, res) => {
 //////////////////
 
 
+var apiSecureRouter = express.Router();
+app.use(`/api`, apiSecureRouter);
+
+apiSecureRouter.use(async (req, res, next) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+
 // GetJetSkis
-apiRouter.get('/jetSki', async (_req, res) => {
+apiSecureRouter.get('/jetSki', async (_req, res) => {
     // res.send(jetSkiList);
     const jetSkis = await DB.getJetSkis();
     res.send(jetSkis);
   });
 
 // SubmitJetSki
-apiRouter.post('/jetSki', (req, res) => {
+apiSecureRouter.post('/jetSki', (req, res) => {
     const jetSkiList = DB.postJetSki(req.body);
     // console.log(req.body);
     // jetSkiList.push(req.body);
@@ -109,7 +112,7 @@ apiRouter.post('/jetSki', (req, res) => {
 });
 
 // SubmitJetSkiList
-apiRouter.post('/jetSkiList', (req, res) => {
+apiSecureRouter.post('/jetSkiList', (req, res) => {
   const jetSkiList = DB.postListJetSkis(req.body);
     // console.log(req.body);
     // jetSkiList = req.body
@@ -119,13 +122,13 @@ apiRouter.post('/jetSkiList', (req, res) => {
 
 
 // GetSnowmobiles
-apiRouter.get('/snowmobile', async (_req, res) => {
+apiSecureRouter.get('/snowmobile', async (_req, res) => {
     const snowmobiles = await DB.getSnowmobiles();
     res.send(snowmobiles);
   });
 
 // SubmitSnowmobile
-apiRouter.post('/snowmobile', (req, res) => {
+apiSecureRouter.post('/snowmobile', (req, res) => {
     const snowmobileList = DB.postSnowmobile(req.body);
   // console.log(req.body);
   // jetSkiList.push(req.body);
@@ -136,7 +139,7 @@ apiRouter.post('/snowmobile', (req, res) => {
     });
 
     // SubmitSnowmobileList
-apiRouter.post('/snowmobileList', (req, res) => {
+apiSecureRouter.post('/snowmobileList', (req, res) => {
     const snowmobileList = DB.postListSnowmobile(req.body);
     // console.log(req.body);
     // jetSkiList = req.body
@@ -148,13 +151,13 @@ apiRouter.post('/snowmobileList', (req, res) => {
 
 
 // Get Razor
-apiRouter.get('/razor', async (_req, res) => {
+apiSecureRouter.get('/razor', async (_req, res) => {
     const razorList = await DB.getRazors();
     res.send(razorList);
   });
 
 // Submit Razor
-apiRouter.post('/razor', (req, res) => {
+apiSecureRouter.post('/razor', (req, res) => {
   const razorList = DB.postRazor(req.body);
     // console.log(req.body);
     // razorList.push(req.body);
@@ -162,7 +165,7 @@ apiRouter.post('/razor', (req, res) => {
     });
 
 // Submit Razor List
-apiRouter.post('/razorList', (req, res) => {
+apiSecureRouter.post('/razorList', (req, res) => {
   const razorList = DB.postListRazor(req.body);
     // console.log(req.body);
     // razorList = req.body
