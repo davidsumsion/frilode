@@ -3,6 +3,7 @@ const { MongoClient } = require('mongodb');
 
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
+const { MongoRuntimeError } = require('mongodb/lib/error');
 // const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -67,10 +68,14 @@ function postJetSki(jetSki) {
   return jetSkiCollection.find({}).toArray();
 }
 
-function postListJetSkis(jetskilist){
-  jetSkiCollection.deleteMany({})
-  jetSkiCollection.insertMany(jetskilist);
-  return jetSkiCollection.find({}).toArray();
+function deleteJetSkis(){
+  try {
+    jetSkiCollection.deleteMany({})
+  } catch {
+    throw MongoRuntimeError
+  }
+  // jetSkiCollection.insertMany(jetskilist);
+  // return jetSkiCollection.find({}).toArray();
 }
 
 
@@ -124,7 +129,7 @@ module.exports = {
   createUser,
   getJetSkis,
   postJetSki,
-  postListJetSkis,
+  deleteJetSkis,
   getSnowmobiles,
   postSnowmobile,
   postListSnowmobile,

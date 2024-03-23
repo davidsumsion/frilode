@@ -63,20 +63,40 @@ document.addEventListener("DOMContentLoaded", async function() {
                     headers: {'content-type': 'application/json'}
                 });
                 let myList = await response.json();
-                // let myList = JSON.parse(localStorage.getItem("jetSkiArr"))
+
+                //DEBUGHERER
+
+                jsonVehicle = JSON.stringify({'vehicle':'jetski'})
+                console.log(jsonVehicle)
+                const response3 = await fetch('/api/delete', {
+                    method: 'DELETE',
+                    headers: {'content-type': 'application/json'},
+                    body: jsonVehicle
+                });
+                // const jetSki2 = await response3.json();
+
+
+                //DEBUG HERER
+
+
                 for (let i = 0; i < myList.length; i++){
                     if (myList[i].name == object.name){
-                        myList[i] = object;
-                    }
+                        myList[i].rented = true;
                 }
-                
-                const jsonJetSkiListString = JSON.stringify(myList)
-                const response2 = await fetch('/api/jetSkiList', {
+
+                for (let i = 0; i < myList.length; i++) {
+                    jsonString = JSON.stringify(object)
+                    const response2 = await fetch('/api/jetSki', {
                     method: 'POST',
                     headers: {'content-type': 'application/json'},
-                    body: jsonJetSkiListString,
-                });
-                const jetSkis = await response2.json();
+                    body: jsonString,
+                    });
+                }
+                }
+
+                //DEBUG HERER
+
+
                 // localStorage.setItem("jetSkiArr", JSON.stringify(myList));
                 window.location.href = "VehicleAdded.html";
                 showAlert("You Rented a Vehicle!")
@@ -477,6 +497,6 @@ function showAlert(message) {
   }
 
 //simulate realtiem alerts that will come in with WebSocket
-setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 5000);
+// setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 5000);
 
 

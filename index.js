@@ -96,6 +96,20 @@ apiSecureRouter.use(async (req, res, next) => {
 });
 
 
+apiSecureRouter.delete('/delete', (req, res) => {
+  console.log("made it to delete")
+  // res.send(jetSkiList);
+  // const obj = JSON.parse(req.body);
+
+
+  if (req.body.vehicle == 'jetski'){
+    DB.deleteJetSkis();
+    res.sendStatus(200);
+  }
+  
+});
+
+
 // GetJetSkis
 apiSecureRouter.get('/jetSki', async (_req, res) => {
     // res.send(jetSkiList);
@@ -111,14 +125,13 @@ apiSecureRouter.post('/jetSki', (req, res) => {
     res.send(jetSkiList);
 });
 
-// SubmitJetSkiList
-apiSecureRouter.post('/jetSkiList', (req, res) => {
-  const jetSkiList = DB.postListJetSkis(req.body);
-    // console.log(req.body);
-    // jetSkiList = req.body
-    res.send(jetSkiList);
-});
-
+// // SubmitJetSkiList
+// apiRouter.post('/jetSkiList', (req, res) => {
+//   const jetSkiList = DB.postListJetSkis(req.body);
+//     // console.log(req.body);
+//     // jetSkiList = req.body
+//     res.send(jetSkiList);
+// });
 
 
 // GetSnowmobiles
