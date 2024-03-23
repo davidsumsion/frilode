@@ -68,14 +68,15 @@ function postJetSki(jetSki) {
   return jetSkiCollection.find({}).toArray();
 }
 
-function deleteJetSkis(){
-  try {
-    jetSkiCollection.deleteMany({})
-  } catch {
-    throw MongoRuntimeError
+function deleteVehicles(indicator){
+  if (indicator == "jetski"){
+    jetSkiCollection.deleteMany({});
+  } else if (indicator == 'snowmobile') {
+    snowmobileCollection.deleteMany({});
+  } else if (indicator == 'razor') {
+    razorCollection.deleteMany({});
   }
-  // jetSkiCollection.insertMany(jetskilist);
-  // return jetSkiCollection.find({}).toArray();
+  
 }
 
 
@@ -88,11 +89,6 @@ function postSnowmobile(snowmobile) {
   return snowmobileCollection.find({}).toArray();
 }
 
-function postListSnowmobile(snowmobileList){
-  snowmobileCollection.deleteMany({})
-  snowmobileCollection.insertMany(snowmobileList);
-  return snowmobileCollection.find({}).toArray();
-}
 
 function getRazors() {
   return razorCollection.find({}).toArray();
@@ -103,25 +99,7 @@ function postRazor(razor) {
   return razorCollection.find({}).toArray();
 }
 
-function postListRazor(razorList){
-  razorCollection.deleteMany({})
-  razorCollection.insertMany(razorList);
-  return razorCollection.find({}).toArray();
-}
 
-// function addScore(score) {
-//   scoreCollection.insertOne(score);
-// }
-
-// function getHighScores() {
-//   const query = { score: { $gt: 0, $lt: 900 } };
-//   const options = {
-//     sort: { score: -1 },
-//     limit: 10,
-//   };
-//   const cursor = scoreCollection.find(query, options);
-//   return cursor.toArray();
-// }
 
 module.exports = {
   getUser,
@@ -129,11 +107,10 @@ module.exports = {
   createUser,
   getJetSkis,
   postJetSki,
-  deleteJetSkis,
+  deleteVehicles,
   getSnowmobiles,
   postSnowmobile,
-  postListSnowmobile,
   getRazors,
   postRazor,
-  postListRazor
+
 };

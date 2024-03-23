@@ -98,15 +98,16 @@ apiSecureRouter.use(async (req, res, next) => {
 
 apiSecureRouter.delete('/delete', (req, res) => {
   console.log("made it to delete")
-  // res.send(jetSkiList);
-  // const obj = JSON.parse(req.body);
-
-
   if (req.body.vehicle == 'jetski'){
-    DB.deleteJetSkis();
+    DB.deleteVehicles('jetski');
+    res.sendStatus(200);
+  } else if (req.body.vehicle == 'snowmobile'){
+    DB.deleteVehicles('snowmobile');
+    res.sendStatus(200);
+  } else if (req.body.vehicle == 'razor'){
+    DB.deleteVehicles('razor');
     res.sendStatus(200);
   }
-  
 });
 
 
@@ -125,13 +126,7 @@ apiSecureRouter.post('/jetSki', (req, res) => {
     res.send(jetSkiList);
 });
 
-// // SubmitJetSkiList
-// apiRouter.post('/jetSkiList', (req, res) => {
-//   const jetSkiList = DB.postListJetSkis(req.body);
-//     // console.log(req.body);
-//     // jetSkiList = req.body
-//     res.send(jetSkiList);
-// });
+
 
 
 // GetSnowmobiles
@@ -151,16 +146,7 @@ apiSecureRouter.post('/snowmobile', (req, res) => {
     res.send(snowmobileList);
     });
 
-    // SubmitSnowmobileList
-apiSecureRouter.post('/snowmobileList', (req, res) => {
-    const snowmobileList = DB.postListSnowmobile(req.body);
-    // console.log(req.body);
-    // jetSkiList = req.body
-    // res.send(jetSkiList);
-    // console.log(req.body);
-    // snowmobileList = req.body
-    res.send(snowmobileList);
-});
+
 
 
 // Get Razor
@@ -177,13 +163,7 @@ apiSecureRouter.post('/razor', (req, res) => {
     res.send(razorList);
     });
 
-// Submit Razor List
-apiSecureRouter.post('/razorList', (req, res) => {
-  const razorList = DB.postListRazor(req.body);
-    // console.log(req.body);
-    // razorList = req.body
-    res.send(razorList);
-});
+
 
 
 
