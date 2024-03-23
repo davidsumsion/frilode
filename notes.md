@@ -25,3 +25,8 @@
 - My app looks great on all window sizes and devices
 - I used good spacing and contrast
 - I used consistent fonts accross my app
+
+## LOGIN
+- I learned the hard way that JSON needs to be under a certain length to be sent
+- I also learned that json objects need to be objects and not strings
+./deployService.sh -k ~/keys/production.pem -h yourdomain.click -s startup
