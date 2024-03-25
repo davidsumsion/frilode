@@ -201,6 +201,13 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+peerProxy(httpService);
+
+
 // // updateScores considers a new score for inclusion in the high scores.
 // // The high scores are saved in memory and disappear whenever the service is restarted.
 // let scores = [];
@@ -224,3 +231,4 @@ app.listen(port, () => {
 
 //   return scores;
 // }
+
