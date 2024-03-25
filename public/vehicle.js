@@ -391,7 +391,7 @@ async function finishedCards() {
         moreInfo.addEventListener("click", async function(){
             localStorage.setItem("selectedVehicle", JSON.stringify(tempVehicle));
             await delayExecution();
-            window.location.href = "exampleVehicle.html";
+            window.location.href = "examplevehicle.html";
         })
 
         var container = document.getElementById("containerMarketplace");
