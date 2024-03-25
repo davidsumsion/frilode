@@ -441,8 +441,13 @@ async function addNewVehicle(){
         });
         const jetSkis = await response.json();
     }  
+    // Let other users know another vehicle was added
+    this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
+
     window.location.href = "VehicleAdded.html";
 }
+
+
 
 
 function showAlert(message) {
@@ -467,4 +472,41 @@ function showAlert(message) {
 //simulate realtiem alerts that will come in with WebSocket
 // setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 5000);
 
+
+  // Functionality for peer communication using WebSocket
+
+  configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      this.displayMsg('system', 'game', 'connected');
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg('system', 'game', 'disconnected');
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      if (msg.type === GameEndEvent) {
+        this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+      } else if (msg.type === GameStartEvent) {
+        this.displayMsg('player', msg.from, `started a new game`);
+      }
+    };
+  }
+
+  displayMsg(cls, from, msg) {
+    const chatText = document.querySelector('#player-messages');
+    chatText.innerHTML =
+      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+  }
+
+  broadcastEvent(from, type, value) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+    };
+    this.socket.send(JSON.stringify(event));
+  }
+}
 
