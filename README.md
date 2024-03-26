@@ -82,3 +82,13 @@ For this deliverable I implemented the JS to make the application log a user in 
 - **existing user** - doesn't allow you to create another user with same name
 - **Use MongoDB to store credentials** - Stores user data
 - **Restricts functionality** - You cannot rent until you have logged in. This is restricted on the frontend only. 
+
+
+## Websocket Deliverable
+For this deliverable I implemented websocket in real time
+- **Live Updates** I implemented a websocket extension on my server to allow for live updates when someone rents a vehicle and when someone lists a vehicle. This is shown with an Alert at the top of the screen.
+- **Backend** the backend listens for a websocket connection
+- **Frontend** the frontend makes a websocket connection
+- Data is sent over websocket connection
+- **display** Alert shown for vehicle rented or listed.
+
