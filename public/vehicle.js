@@ -454,12 +454,12 @@ function   getPlayerName() {
   }
 
 
-function showAlert(user ,message) {
+function showAlert(message) {
     const alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', 'alert-primary', 'alert-dismissible', 'fade', 'show');
     alertDiv.setAttribute('role', 'alert');
   
-    alertDiv.textContent = user + message;
+    alertDiv.textContent = message;
   
     const closeButton = document.createElement('button');
     closeButton.classList.add('btn-close');
@@ -482,27 +482,24 @@ socket;
   function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    socket.onopen = (event) => {
-      showAlert('from', 'vehicleType');
-    };
-    socket.onclose = (event) => {
-      showAlert('from', 'vehicleType');
-    };
+    // socket.onopen = (event) => {
+    //   showAlert('from', 'vehicleType');
+    // };
+    // socket.onclose = (event) => {
+    //   showAlert('from', 'vehicleType');
+    // };
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
-      if (msg.type === GameEndEvent) {
-        showAlert('from', 'vehicleType');
-      } else if (msg.type === GameStartEvent) {
-        showAlert('from', 'vehicleType');
-      }
+      const message = 'User: ' + msg.from + 'added a ' + msg.vehicleType;
+      showAlert(message)
     };
   }
 
 
-  function broadcastEvent(from, vehicleType) {
+  function broadcastEvent(user, vehicle) {
     const event = {
-      from: from,
-      vehicleType: vehicleType,
+      from: user,
+      vehicleType: vehicle,
     };
     this.socket.send(JSON.stringify(event));
   }
