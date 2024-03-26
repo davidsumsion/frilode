@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", async function() {
                 window.location.href = "VehicleAdded.html";
                 showAlert("You Rented a Vehicle!")
             }
+            broadcastEvent(getPlayerName(), object.vehicleType, 'Rented');
         });   
     }
 }); 
@@ -442,7 +443,7 @@ async function addNewVehicle(){
         const jetSkis = await response.json();
     }  
     // Let other users know another vehicle was added
-    broadcastEvent(getPlayerName(), vehicleTypeEl.value);
+    broadcastEvent(getPlayerName(), vehicleTypeEl.value, 'added');
 
     window.location.href = "VehicleAdded.html";
 }
@@ -489,17 +490,24 @@ socket;
     //   showAlert('from', 'vehicleType');
     // };
     socket.onmessage = async (event) => {
-      const msg = JSON.parse(await event.data.text());
-      const message = 'User: ' + msg.from + 'added a ' + msg.vehicleType;
-      showAlert(message)
+        const msg = JSON.parse(await event.data.text());
+        if (msg.msgType == 'added') {
+            const message = 'User: ' + msg.from + ' added a ' + msg.vehicleType;
+            showAlert(message)
+        } else {
+            const message = 'User: ' + msg.from + ' rented a ' + msg.vehicleType;
+            showAlert(message)
+        }
+      
     };
   }
 
 
-  function broadcastEvent(user, vehicle) {
+  function broadcastEvent(user, vehicle, type) {
     const event = {
       from: user,
       vehicleType: vehicle,
+      msgType: type
     };
     this.socket.send(JSON.stringify(event));
   }
