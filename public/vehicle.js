@@ -442,20 +442,24 @@ async function addNewVehicle(){
         const jetSkis = await response.json();
     }  
     // Let other users know another vehicle was added
-    this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
+    broadcastEvent(getPlayerName(), vehicleTypeEl.value);
 
     window.location.href = "VehicleAdded.html";
 }
 
+configureWebSocket();
+
+function   getPlayerName() {
+    return localStorage.getItem('userName') ?? 'User';
+  }
 
 
-
-function showAlert(message) {
+function showAlert(user ,message) {
     const alertDiv = document.createElement('div');
     alertDiv.classList.add('alert', 'alert-primary', 'alert-dismissible', 'fade', 'show');
     alertDiv.setAttribute('role', 'alert');
   
-    alertDiv.textContent = message;
+    alertDiv.textContent = user + message;
   
     const closeButton = document.createElement('button');
     closeButton.classList.add('btn-close');
@@ -472,33 +476,33 @@ function showAlert(message) {
 //simulate realtiem alerts that will come in with WebSocket
 // setInterval(() => { showAlert("Someone Rented a Vehicle!") }, 5000);
 
+socket;
 
   // Functionality for peer communication using WebSocket
   function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    this.socket.onopen = (event) => {
-      this.displayMsg('system', 'game', 'connected');
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+      showAlert('from', 'vehicleType');
     };
-    this.socket.onclose = (event) => {
-      this.displayMsg('system', 'game', 'disconnected');
+    socket.onclose = (event) => {
+      showAlert('from', 'vehicleType');
     };
-    this.socket.onmessage = async (event) => {
+    socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === GameEndEvent) {
-        this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+        showAlert('from', 'vehicleType');
       } else if (msg.type === GameStartEvent) {
-        this.displayMsg('player', msg.from, `started a new game`);
+        showAlert('from', 'vehicleType');
       }
     };
   }
 
 
-  function broadcastEvent(from, type, value) {
+  function broadcastEvent(from, vehicleType) {
     const event = {
       from: from,
-      type: type,
-      value: value,
+      vehicleType: vehicleType,
     };
     this.socket.send(JSON.stringify(event));
   }
