@@ -30,3 +30,21 @@
 - I learned the hard way that JSON needs to be under a certain length to be sent
 - I also learned that json objects need to be objects and not strings
 ./deployService.sh -k ~/keys/production.pem -h yourdomain.click -s startup
+
+
+## React 
+- import 'bootstrap/dist/css/bootstrap.min.css';
+    need to first do 
+    npm install bootstrap react-bootstrap
+    npm install react react-dom react-router-dom
+    EXAMPLE:
+import Button from 'react-bootstrap/Button';
+    
+export function NavButton({ text, url }) {
+  const navigate = useNavigate();
+  return (
+    <Button variant='primary' onClick={() => navigate({ url })}>
+      {text}
+    </Button>
+  );
+}
