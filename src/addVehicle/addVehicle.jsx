@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function addVehicle() {
+export function AddVehicle() {
   return (
     <main className='container-fluid bg-secondary text-center'>
       <div>Add Vehicle displayed here</div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function search() {
+export function Search() {
   return (
     <main className='container-fluid bg-secondary text-center'>
       <div>search displayed here</div>

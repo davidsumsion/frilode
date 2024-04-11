@@ -2,13 +2,13 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { addVehicle } from './addVehicle/addVehicle';
-import { availability } from './availability/availability';
+import { AddVehicle } from './addVehicle/addVehicle';
+import { Availability } from './availability/availability';
 import { Login } from './login/login';
-import { results } from './results/results';
-import { search } from './search/search';
-import { success } from './success/success';
-import { vehicle } from './vehicle/vehicle';
+import { Results } from './results/results';
+import { Search } from './search/search';
+import { Success } from './success/success';
+import { Vehicle } from './vehicle/vehicle';
 
 
 export default function App() {
@@ -59,8 +59,11 @@ export default function App() {
                 </header>
                 <Routes>
                     <Route path='/' element={<Login />} exact />
-                    <Route path='/search' element={<search />} exact />
-
+                    <Route path='/search' element={<Search />} exact />
+                    <Route path='/results' element={<Results />} exact />
+                    <Route path='/availability' element={<Availability />} exact />
+                    <Route path='/success' element={<Success />} exact />
+                    <Route path='/vehicle' element={<Vehicle />} exact />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
                 <footer>
