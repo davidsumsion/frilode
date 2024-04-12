@@ -1,5 +1,5 @@
 import React from 'react';
-import './vehicle.css'
+// import './vehicle.css'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -125,12 +125,11 @@ export function Vehicle() {
 
 
   return (
-    <main className='container-fluid text-center'>
-      <div className="bd-example">
-        <h2 id="descriptivetitle">{vehicle.name}</h2>
+    <main>
+    <h2 id="descriptivetitle">{vehicle.name}</h2>
         <div className="container">
           <div className="card">
-            <img className="market-photos" id= 'specImg' src="" alt="Example img1"></img>
+            <img className="market-photos" id= 'specImg' src={vehicle.image} alt={vehicle.name}></img>
             <h3 id="specTitle">{vehicle.name}</h3>
             <p id = "specInfo">
                 Price/day: {vehicle.priceDay}$
@@ -138,18 +137,18 @@ export function Vehicle() {
                 Make: {vehicle.make}
                 Model: {vehicle.model}
             </p>
-            <div className="card long">
+            </div>
+            <div className="card">
               <h5>
                 Description: 
               </h5>
               <p id="longDescription">{vehicle.description}</p>
-          </div>
-        </div>
+           </div>
+        
       </div>
       <div className="col-md-3 text-end">
         <a id="rent" className="btn btn-dark" onClick={ () =>rent() }>Book Now</a>
       </div>
-    </div>
   </main>
   );
 }

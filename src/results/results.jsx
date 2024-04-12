@@ -52,27 +52,19 @@ export function Results() {
                   Make: {tempVehicle.make}
                   Model: {tempVehicle.model}
               </p>
-              
               <button type="submit" className="btn btn-primary btn-sm" onClick={() => rent(tempVehicle)} >See More Information</button>        
-              
         </div>
       );      
     }
   } else {
     console.log('no data!')
   }
-  // return (
-  //   <main className='container-fluid text-center'>
-  //     <div>results displayed here</div>
-  //     <div id='containers'>{queryResultsDisplay}</div>
-  //   </main>
-  // );
 
   return (
     <div className="overview">
       <h2> Results of your search: </h2>
-      <div className="containerMarketplace" id ="containerMarketplace">
-           <div id='containers'>{queryResultsDisplay}</div>
+      <div className="containerMarketplace">
+           {queryResultsDisplay}
       </div>
     </div>
   );

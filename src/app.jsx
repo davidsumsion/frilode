@@ -13,9 +13,8 @@ import { Vehicle } from './vehicle/vehicle';
 export default function App() {
     return (
         <BrowserRouter>
-            <div>
-                <header id="myHeader" className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                    <nav className='navbar fixed-top navbar-dark'>
+                <header id="myHeader" className="d-flex flex-wrap align-items-center justify-content-left justify-content-md-between py-3 mb-4 border-bottom">
+                    <nav className='navbar navbar-dark'>
                         <div className='navbar-brand'>
                             <h1>
                                 frilode
@@ -83,7 +82,6 @@ export default function App() {
                         </div>
                     </div>
                 </footer>
-            </div>
         </BrowserRouter>
     )
 }
