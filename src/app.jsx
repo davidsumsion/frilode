@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { AddVehicle } from './addVehicle/addVehicle';
-import { Availability } from './availability/availability';
 import { Login } from './login/login';
 import { Results } from './results/results';
 import { Search } from './search/search';
@@ -39,8 +38,8 @@ export default function App() {
                                 </NavLink>
                             </li>
                             <li className='nav-item'>
-                                <NavLink className='nav-link' to='availability'>
-                                    Availability
+                                <NavLink className='nav-link' to='addVehicle'>
+                                    Add Vehicle
                                 </NavLink>
                             </li>
                             <li className='nav-item'>
@@ -60,9 +59,9 @@ export default function App() {
                     <Route path='/' element={<Login />} exact />
                     <Route path='/search' element={<Search />} exact />
                     <Route path='/results' element={<Results />} exact />
-                    <Route path='/availability' element={<Availability />} exact />
                     <Route path='/success' element={<Success />} exact />
                     <Route path='/vehicle' element={<Vehicle />} exact />
+                    <Route path='/addVehicle' element={<AddVehicle />} exact />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
                 <footer>
