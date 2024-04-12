@@ -1,6 +1,10 @@
 import React from 'react';
+import './results.css'
+import { useNavigate } from 'react-router-dom';
+
 
 export function Results() {
+  const navigate = useNavigate();
 
   class Vehicle {
     constructor(vehicleType, name, priceDay, priceHour, make, model, description, image, rented=false){
@@ -23,6 +27,14 @@ export function Results() {
     getImage(){ return this.image; }
   }
 
+  
+  function rent(myVehicle) {
+    localStorage.setItem("selectedVehicle", JSON.stringify(myVehicle));
+    //change windows
+    navigate('/vehicle')
+  }
+
+
   var queryResultsDisplay = []
   const data = JSON.parse(localStorage.getItem("queryResults"))
   if (data.length){
@@ -32,27 +44,55 @@ export function Results() {
       const tempVehicle = new Vehicle(jsonObject.vehicleType, jsonObject.name, jsonObject.priceDay, jsonObject.priceHour, jsonObject.make, jsonObject.model, jsonObject.description, jsonObject.image, jsonObject.rented)
       queryResultsDisplay.push(
         <div className="card">
-              <img className="market-photos" src={tempVehicle.image} alt="Example img1"></img>
-              <h3>JetSki Example 3</h3>
+              <img className="market-photos" src={tempVehicle.image} alt={tempVehicle.name}></img>
+              <h3>{tempVehicle.name}</h3>
               <p>
-                  Price/day: 60$
-                  Price/hour: 25$
-                  Make: SkiDoo
-                  Model: 2021 splasher
+                  Price/day: {tempVehicle.priceDay}$
+                  Price/hour: {tempVehicle.priceHour}
+                  Make: {tempVehicle.make}
+                  Model: {tempVehicle.model}
               </p>
-              <form method="get" action="examplevehicle.html">
-                  <button type="submit" className="btn btn-primary btn-sm">See More Information</button>        
-              </form>
+              
+              <button type="submit" className="btn btn-primary btn-sm" onClick={() => rent(tempVehicle)} >See More Information</button>        
+              
         </div>
       );      
     }
   } else {
     console.log('no data!')
   }
+  // return (
+  //   <main className='container-fluid text-center'>
+  //     <div>results displayed here</div>
+  //     <div id='containers'>{queryResultsDisplay}</div>
+  //   </main>
+  // );
+
   return (
-    <main className='container-fluid text-center'>
-      <div>results displayed here</div>
-      <div id='containers'>{queryResultsDisplay}</div>
-    </main>
+    <div className="overview">
+      <h2> Results of your search: </h2>
+      <div className="containerMarketplace" id ="containerMarketplace">
+           <div id='containers'>{queryResultsDisplay}</div>
+      </div>
+    </div>
   );
 }
+
+
+
+
+
+
+// <div className="card">
+//       <img className="market-photos" src={tempVehicle.image} alt={tempVehicle.name} />
+//       <h3>{tempVehicle.name}</h3>
+//       <p>
+//         Price/day: {tempVehicle.priceDay}$<br />
+//         Price/hour: {tempVehicle.priceHour}$<br />
+//         Make: {tempVehicle.make}<br />
+//         Model: {tempVehicle.model}
+//       </p>
+//       <button type="submit" className="btn btn-primary btn-sm" onClick={rent}>
+//         See More Information
+//       </button>
+//     </div>
