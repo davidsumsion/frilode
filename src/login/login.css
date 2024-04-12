@@ -1,0 +1,14 @@
+.rounded-div {
+    border-radius: 10px;
+    border: 2px solid #333;
+    padding: 20px;
+    margin: 20px; 
+}
+
+.bd {
+    padding: 20px;
+}
+
+.form-label {
+    font-size: 20px;
+}

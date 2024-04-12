@@ -1,9 +1,13 @@
 import React from 'react';
+import './success.css'
 
 export function Success() {
   return (
-    <main className='container-fluid bg-secondary text-center'>
-      <div>success displayed here</div>
+    <main className='container-fluid text-center'>
+      <div class="title-success">
+            <h1>  Success! </h1>
+            <p> You Successfully Rented or Added a Vehicle!</p>
+     </div>
     </main>
   );
 }

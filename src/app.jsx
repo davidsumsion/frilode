@@ -22,7 +22,6 @@ export default function App() {
                                 frilode
                             </h1>
                         </div>
-
                         <menu className='navbar-nav'>
                             <li className='nav-item'>
                                 <NavLink className='nav-link' to=''>
@@ -88,21 +87,11 @@ export default function App() {
             </div>
         </BrowserRouter>
     )
-//   return <div className='body bg-dark text-light'>App will display here</div>;
 }
 
 
 function NotFound() {
     return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
   }
-  
-
-
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <BrowserRouter>
-//     <div className='body bg-dark text-light'> </div>
-//   </BrowserRouter>
-// );
 
 
