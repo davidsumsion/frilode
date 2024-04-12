@@ -12,6 +12,14 @@ import { Vehicle } from './vehicle/vehicle';
 
 
 export default function App() {
+    function logout() {
+        console.log("logging out")
+        localStorage.removeItem('username');
+        fetch(`/api/auth/logout`, {
+          method: 'delete',
+        });
+      }
+
     return (
         <BrowserRouter>
                 <header id="myHeader" className="d-flex flex-wrap align-items-center justify-content-left justify-content-md-between py-3 mb-4 border-bottom">
@@ -22,11 +30,6 @@ export default function App() {
                             </h1>
                         </div>
                         <menu className='navbar-nav'>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to=''>
-                                Login
-                                </NavLink>
-                            </li>
                             <li className='nav-item'>
                                 <NavLink className='nav-link' to='search'>
                                     Search
@@ -50,6 +53,16 @@ export default function App() {
                             <li className='nav-item'>
                                 <NavLink className='nav-link' to='vehicle'>
                                     Vehicle
+                                </NavLink>
+                            </li>
+                            <li className='nav-item'>
+                                <NavLink className='nav-link' to=''>
+                                Login
+                                </NavLink>
+                            </li>
+                            <li className='nav-item'>
+                                <NavLink className='nav-link' onClick={() => logout()} to=''>
+                                Logout
                                 </NavLink>
                             </li>
                         </menu>
