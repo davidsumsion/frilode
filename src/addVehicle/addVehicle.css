@@ -1,0 +1,39 @@
+.container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 400px;
+    grid-gap: 1em;
+  }
+  .card {
+    border: #333 solid thick;
+    border-radius: 1em;
+    text-align: center;
+  }
+  .card.long {
+    grid-column: span 3;
+    /* gird-row: span 2; */
+    text-align: left;
+    padding: 20px;
+    height: 5000px;
+  }
+
+  img.market-photos {
+    border-radius: 10px;
+  }
+
+  main h3 {
+    font-size: 20px;
+    padding: 10px;
+    
+  }
+  main {
+    padding: 50px;
+  }
+  main h2 {
+    padding: 20px;
+  }
+  .mb-3 {
+    padding:20px
+
+  }
