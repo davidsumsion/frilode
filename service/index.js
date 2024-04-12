@@ -99,7 +99,6 @@ apiSecureRouter.use(async (req, res, next) => {
 
 
 apiSecureRouter.delete('/delete', (req, res) => {
-  console.log("made it to delete")
   if (req.body.vehicle == 'jetski'){
     DB.deleteVehicles('jetski');
     res.sendStatus(200);
