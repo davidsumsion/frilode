@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { AddVehicle } from './addVehicle/addVehicle';
@@ -65,18 +66,18 @@ export default function App() {
                 </Routes>
                 <footer>
                     <div className="bd-example">
-                        <div className="accordion" id="accordionExample">
+                        <div className="accordion">
                             <div className="accordion-item">
                                 <h2 className="accordion-header" id="headingTwo">
                                     <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">About the Developer</button>
                                 </h2>
                                 <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                    <div className="accordion-body">
-                                        <strong>
-                                            <p> David Sumsion</p>
-                                            <a href="https://github.com/davidsumsion/Startup">MyGitHub</a>
-                                        </strong> 
-                                    </div>
+                                <div className="accordion-body">
+                                    <strong>
+                                        <p> David Sumsion</p>
+                                        <a href="https://github.com/davidsumsion/Startup">MyGitHub</a>
+                                    </strong> 
+                                </div>
                                 </div>
                             </div>
                         </div>
