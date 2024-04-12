@@ -94,4 +94,8 @@ For this deliverable I implemented websocket in real time
 
 
 ## React Deliverable
-For this deliverable I will implement React
+For this deliverable I implemented React
+- **Vite** vite used to bundle
+- **React Components** Rebuilt entire website in React
+- **React Router** React Router is used to dynamically build my website 
+- **React Hooks** Hooks used on components on multiple pages. Check out /src/addVehicle/addVehicle.jsx for a bigger example.
