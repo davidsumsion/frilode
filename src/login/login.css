@@ -1,14 +1,35 @@
-.rounded-div {
-    border-radius: 10px;
-    border: 2px solid #333;
+.loginMenu {
+    border: 3px solid #333;
+    border-radius: 20px;
+    margin: 50px;
     padding: 20px;
-    margin: 20px; 
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
 }
-
-.bd {
-    padding: 20px;
-}
-
 .form-label {
-    font-size: 20px;
+    font-size: 12px;
+}
+.loginItem {
+    padding-top: 10px
+}
+.loginItems {
+    padding: 15px 30px 30px 30px;
+    font-size: 10px;
+}
+#title {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+#createAccount {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#createAccountText {
+    font-size: 10px;
+}
+.mainPage {
+    display: flex;
+    justify-content: center;
 }

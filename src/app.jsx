@@ -13,7 +13,7 @@ import { Vehicle } from './vehicle/vehicle';
 
 export default function App() {
     function logout() {
-        console.log("logging out")
+        // console.log("logging out")
         localStorage.removeItem('username');
         fetch(`/api/auth/logout`, {
           method: 'delete',
@@ -21,15 +21,15 @@ export default function App() {
       }
 
     return (
-        <BrowserRouter>
-                <header id="myHeader" className="d-flex flex-wrap align-items-center justify-content-left justify-content-md-between py-3 mb-4 border-bottom">
-                    <nav className='navbar navbar-dark'>
-                        <div className='navbar-brand'>
-                            <h1>
-                                frilode
-                            </h1>
-                        </div>
-                        <menu className='navbar-nav'>
+        <BrowserRouter className='app'>
+                <header className="mainHeader">
+                    <div className='brandName'>
+                        <h1>
+                            frilode
+                        </h1>
+                    </div>
+                    {/* <nav className='navbar'> */}
+                        <menu className='navbar'>
                             <li className='nav-item'>
                                 <NavLink className='nav-link' to='search'>
                                     Search
@@ -66,9 +66,9 @@ export default function App() {
                                 </NavLink>
                             </li>
                         </menu>
-                    </nav>
+                    {/* </nav> */}
                 </header>
-                <Routes>
+                <Routes className='appContent'>
                     <Route path='/' element={<Login />} exact />
                     <Route path='/search' element={<Search />} exact />
                     <Route path='/results' element={<Results />} exact />
@@ -77,20 +77,27 @@ export default function App() {
                     <Route path='/addVehicle' element={<AddVehicle />} exact />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
-                <footer>
-                    <div className="bd-example">
-                        <div className="accordion">
-                            <div className="accordion-item">
-                                <h2 className="accordion-header" id="headingTwo">
-                                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">About the Developer</button>
-                                </h2>
-                                <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <footer className='gradient-footer'>
+                    <div className="accordion" id="helpAccordion">
+                        <div className="accordion-item">
+                            <h2 className="accordion-header" id="headingHelp">
+                                <button 
+                                    className="accordion-button collapsed" 
+                                    type="button" 
+                                    data-bs-toggle="collapse" 
+                                    data-bs-target="#collapseHelp" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapseHelp">
+                                    Need Help?
+                                </button>
+                            </h2>
+                            <div 
+                                id="collapseHelp" 
+                                className="accordion-collapse collapse" 
+                                aria-labelledby="headingHelp" 
+                                data-bs-parent="#helpAccordion">
                                 <div className="accordion-body">
-                                    <strong>
-                                        <p> David Sumsion</p>
-                                        <a href="https://github.com/davidsumsion/Startup">MyGitHub</a>
-                                    </strong> 
-                                </div>
+                                    <p><strong>Text 801-682-2893 outlining your problem</strong></p>
                                 </div>
                             </div>
                         </div>

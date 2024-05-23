@@ -28,7 +28,6 @@ export function Login() {
   
     if (response.ok) {
       localStorage.setItem('username', username);
-      // window.location.href = "query.html";
       navigate('/search')
     } else {
       const body = await response.json();
@@ -41,26 +40,26 @@ export function Login() {
   }
 
   return (
-    <main className='container-fluid text-center'>
-          <title>FRILODE</title>
-
-      <div className="bd" >
-            <label htmlFor="bd-example" className="form-label">Welcome, Login to Rent a Vehicle</label>
-            <div>
-              <div className="px-4 py-3" >
-                <div className="mb-3">
-                  <label htmlFor="Email" className="form-label">Email address</label>
+    <div className="mainPage">
+      <div className="loginMenu" >
+            <h2 id="title" >Sign in</h2>
+            <div className="loginItems">
+                <div className="loginItem">
+                  <label className="form-label">Email or mobile phone number:</label>
                   <input type="email" className="form-control" id="Email" onChange={(e) => updateUsername(e.target.value) } placeholder="email@example.com" value={username}></input>
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                <div className="loginItem">
+                  <label className="form-label">Password:</label>
                   <input type="password" className="form-control" id="password" onChange={(e) => updatePassword(e.target.value) } value={password} placeholder="Password"></input>
                 </div>
-                <button className="btn btn-primary" onClick={() => loginUser()}>Sign in</button>
-                <button className="btn btn-primary" onClick={() => createUser()}>Create Account</button>
-              </div>
+                <div className="loginItem">
+                  <button className="btn btn-primary" onClick={() => loginUser()}>Sign in</button>
+                </div>
             </div>
-
+            <div id="createAccount">
+              <label id="createAccountText">Don't have an account? Create one below:</label>
+              <button className="btn btn-primary" onClick={() => createUser()}>Create Account</button>
+            </div>
             <div className="modal fade" id="msgModal" tabIndex="-1">
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content text-dark">
@@ -72,32 +71,6 @@ export function Login() {
               </div>
             </div>
       </div>
-    </main>
+    </div>
   );
 }
-
-
-// function loginHook(){
-
-//   // useNavigate(navitage/search)
-// }
-
-
-
-// function UseEffectHookDemo() {
-//   const [username, updateUsername] = React.useState(null);
-//   const [password, updatePassword] = React.useState(null);
-
-//   React.useEffect(() => {
-//     console.log('username/password updated updated');
-//   }, [username, password]);
-
-//   return (
-//     <ol>
-//       <li onClick={() => updateCount1(count1 + 1)}>Item 1 - {count1}</li>
-//       <li onClick={() => updateCount2(count2 + 1)}>Item 2 - {count2}</li>
-//     </ol>
-//   );
-// }
-
-// ReactDOM.render(<UseEffectHookDemo />, document.getElementById('root'));

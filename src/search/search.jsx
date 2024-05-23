@@ -13,7 +13,7 @@ export function Search() {
   // fakeData();
 
   async function search(VT){
-    console.log("reached search")
+    // console.log("reached search")
     var vehicleList = [];
     if (VT === "jetSkiArr") {
         const response = await fetch('/api/jetSki', {

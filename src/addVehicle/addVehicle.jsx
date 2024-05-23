@@ -38,23 +38,23 @@ export function AddVehicle() {
 }
 
   async function addNewVehicle(){
-    console.log("made it to add new vehicle")
+    // console.log("made it to add new vehicle")
     var image = "";
     if (vehicleType=="jetSki") {image = jetSkiImage}
     if (vehicleType=="snowmobile") {image = snowmobileImage}
     if (vehicleType=="razor") {image = razorImage}
 
     let newVehicle = new Vehicle(vehicleType, name, priceDay, priceHour, make, model, description, "");
-    console.log("vehicleType: ", vehicleType)
+    // console.log("vehicleType: ", vehicleType)
     if (vehicleType == "jetSki") { 
-        console.log("made it")
+        // console.log("made it")
         const jsonJetSkiString = JSON.stringify(newVehicle)
         const response = await fetch('/api/jetSki', {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: jsonJetSkiString,
         });
-        console.log("sent http")
+        // console.log("sent http")
         const jetSkis = await response.json();
     }    
     if (vehicleType == "snowmobile") { 

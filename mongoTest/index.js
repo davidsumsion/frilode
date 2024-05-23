@@ -13,7 +13,7 @@ async function main() {
     await client.connect();
     await db.command({ ping: 1 });
   })().catch((ex) => {
-    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    // console.log(`Unable to connect to database with ${url} because ${ex.message}`);
     process.exit(1);
   });
 

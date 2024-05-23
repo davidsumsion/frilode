@@ -18,7 +18,7 @@ export function Vehicle() {
         });
         let myList = await response.json();
         var jsonVehicle = JSON.stringify({'vehicle':'jetski'})
-        console.log(jsonVehicle)
+        // console.log(jsonVehicle)
         const response3 = await fetch('/api/delete', {
             method: 'DELETE',
             headers: {'content-type': 'application/json'},
@@ -47,7 +47,7 @@ export function Vehicle() {
         let myList = await response.json();
 
         var jsonVehicle = JSON.stringify({'vehicle':'snowmobile'})
-        console.log(jsonVehicle)
+        // console.log(jsonVehicle)
         const response3 = await fetch('/api/delete', {
             method: 'DELETE',
             headers: {'content-type': 'application/json'},
@@ -77,7 +77,7 @@ export function Vehicle() {
         });
         let myList = await response.json();
         var jsonVehicle = JSON.stringify({'vehicle':'razor'})
-        console.log(jsonVehicle)
+        // console.log(jsonVehicle)
         const response3 = await fetch('/api/delete', {
             method: 'DELETE',
             headers: {'content-type': 'application/json'},
