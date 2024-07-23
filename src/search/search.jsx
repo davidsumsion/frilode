@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getVehiclesByType } from '../api/vehicleAPI';
 
 
 export function Search() {
@@ -12,48 +13,12 @@ export function Search() {
 
   // fakeData();
 
-  async function search(VT){
-    // console.log("reached search")
-    let vehicleList = [];
-    if (VT === "jetSkiArr") {
-        const response = await fetch('api/vehicles', {
-          method: 'GET',
-          headers:  {
-            'content-type': 'application/json',
-            'vehicleType': 'jetSki'
-          }
-        })
-        vehicleList = await response.json();
-        // const response = await fetch('/api/jetSki', {
-        //     method: 'GET',
-        //     headers: {'content-type': 'application/json'}
-        // });
-        // vehicleList = await response.json();
-    }
-    if (VT === "snowmobileArr") {
-        const response = await fetch('/api/snowmobile', {
-            method: 'GET',
-            headers: {'content-type': 'application/json'}
-        });
-        vehicleList = await response.json();
-    }
-    if (VT === "razorArr") {
-        const response = await fetch('/api/razor', {
-            method: 'GET',
-            headers: {'content-type': 'application/json'}
-        });
-        vehicleList = await response.json();
-    }
-    let retList = [];
-    for (let i = 0; i < vehicleList.length; i++){
-        if(vehicleList[i].rented != true){
-            retList.push(vehicleList[i]);
-        }
-    }
-    localStorage.setItem("queryResults", JSON.stringify(retList))
-    navigate('/results')
+  async function search(vehicleType){
+    const response = await getVehiclesByType(vehicleType)
+    const vehicleList = await response.json();
+    localStorage.setItem("queryResults", JSON.stringify(vehicleList))
+    if (response.ok) navigate('/results')
 };
-
 
 return (
     <main className='container-fluid text-center'>
@@ -63,9 +28,9 @@ return (
               What do you want to rent?
             </button>
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" id="vehicleTypeButton">
-              <li><a className="dropdown-item" id="jetSki" onClick={() => search('jetSkiArr')}>Jet Ski</a></li>
-              <li><a className="dropdown-item" id="snowmobile" onClick={() => search('snowmobileArr')}>Snowmobile</a></li>
-              <li><a className="dropdown-item" id="razor" onClick={() => search('razorArr')}>Razor</a></li>
+              <li><a className="dropdown-item" id="jetSki" onClick={() => search('jetSki')}>Jet Ski</a></li>
+              <li><a className="dropdown-item" id="snowmobile" onClick={() => search('snowmobile')}>Snowmobile</a></li>
+              <li><a className="dropdown-item" id="razor" onClick={() => search('razor')}>Razor</a></li>
             </ul>
           </div>
     </main>

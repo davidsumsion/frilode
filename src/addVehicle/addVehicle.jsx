@@ -1,6 +1,7 @@
 import React from 'react';
 import './addVehicle.css'
 import { useNavigate } from 'react-router-dom';
+import { createVehicle } from '../api/vehicleAPI.js'
 
 
 export function AddVehicle() {
@@ -45,13 +46,8 @@ export function AddVehicle() {
     if (vehicleType=="razor") {image = razorImage}
 
     let newVehicle = new Vehicle(vehicleType, name, priceDay, priceHour, make, model, description, "");
-    const vehicleString = JSON.stringify(newVehicle)
-    const response = await fetch('/api/addVehicle', {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        body: vehicleString
-    });
-    if (response.status == 200) navigate('/success')
+    const response = await createVehicle(newVehicle)
+    if (response.ok) navigate('/success')
 }
 
   return (
