@@ -45,9 +45,7 @@ export function AddVehicle() {
     if (vehicleType=="razor") {image = razorImage}
 
     let newVehicle = new Vehicle(vehicleType, name, priceDay, priceHour, make, model, description, "");
-    // console.log("vehicleType: ", vehicleType)
     if (vehicleType == "jetSki") { 
-        // console.log("made it")
         const jsonJetSkiString = JSON.stringify(newVehicle)
         const response = await fetch('/api/jetSki', {
             method: 'POST',

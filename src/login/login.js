@@ -1,25 +1,34 @@
-  
 async function loginUser() {
+  // const userName = document.querySelector('#Email')?.value;
+  // const password = document.querySelector('#password')?.value;
+  // loginOrCreate(`/api/auth/login`, {userName: userName, password: password});
   loginOrCreate(`/api/auth/login`);
 }
 
 async function createUser() {
+  // const userName = document.querySelector('#userName')?.value;
+  // const password = document.querySelector('#password')?.value;
+  // // TODO: phone number validation for USA
+  // const phoneNumber = document.querySelector('#phoneNumber')?.value;
+  // const email = document.querySelector('#Email')?.value;
+  // const prefferedName = document.querySelector('#prefferedName')?.value;
+  // // TODO: direct to drivers licence creation
+  // loginOrCreate(`/api/auth/create`, {userName: userName, password: password, phoneNumber: phoneNumber, email: email, prefferedName: prefferedName})
   loginOrCreate(`/api/auth/create`);
 }
 
 async function loginOrCreate(endpoint) {
-  const userName = document.querySelector('#Email')?.value;
+  const email = document.querySelector('#Email')?.value;
   const password = document.querySelector('#password')?.value;
   const response = await fetch(endpoint, {
     method: 'post',
-    body: JSON.stringify({ email: userName, password: password }),
+    body: JSON.stringify({ email: email, password: password }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
   });
-
   if (response.ok) {
-    localStorage.setItem('userName', userName);
+    localStorage.setItem('userName', email);
     window.location.href = "query.html";
   } else {
     const body = await response.json();
@@ -28,23 +37,13 @@ async function loginOrCreate(endpoint) {
     const msgModal = new bootstrap.Modal(modalEl, {});
     msgModal.show();
   }
-
 }
 
 async function getUser(email) {
-  let scores = [];
   const response = await fetch(`/api/user/${email}`);
   if (response.status === 200) {
     return response.json();
   }
-
   return null;
-}
-
-function setDisplay(controlId, display) {
-  const playControlEl = document.querySelector(`#${controlId}`);
-  if (playControlEl) {
-    playControlEl.style.display = display;
-  }
 }
   

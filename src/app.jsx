@@ -77,31 +77,7 @@ export default function App() {
                     <Route path='/addVehicle' element={<AddVehicle />} exact />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
-                <footer className='gradient-footer'>
-                    <div className="accordion" id="helpAccordion">
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="headingHelp">
-                                <button 
-                                    className="accordion-button collapsed" 
-                                    type="button" 
-                                    data-bs-toggle="collapse" 
-                                    data-bs-target="#collapseHelp" 
-                                    aria-expanded="false" 
-                                    aria-controls="collapseHelp">
-                                    Need Help?
-                                </button>
-                            </h2>
-                            <div 
-                                id="collapseHelp" 
-                                className="accordion-collapse collapse" 
-                                aria-labelledby="headingHelp" 
-                                data-bs-parent="#helpAccordion">
-                                <div className="accordion-body">
-                                    <p><strong>Text 801-682-2893 outlining your problem</strong></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <footer>
                 </footer>
         </BrowserRouter>
     )

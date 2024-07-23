@@ -8,35 +8,52 @@ export function Vehicle() {
   const navigate = useNavigate();
 
   async function rent(){
+    console.log(localStorage.getItem("selectedVehicle"))
     var object = JSON.parse(localStorage.getItem("selectedVehicle"));
     object.rented = true;
     //JET SKI
     if (object.vehicleType == "jetSki"){
-        const response = await fetch('/api/jetSki', {
-            method: 'GET',
-            headers: {'content-type': 'application/json'}
-        });
-        let myList = await response.json();
-        var jsonVehicle = JSON.stringify({'vehicle':'jetski'})
-        // console.log(jsonVehicle)
-        const response3 = await fetch('/api/delete', {
-            method: 'DELETE',
+        console.log('jetSki!')
+        const response = await fetch('/api/rentVehicle', {
+            method: 'PATCH',
             headers: {'content-type': 'application/json'},
-            body: jsonVehicle
-        });
-        for (let i = 0; i < myList.length; i++){
-            if (myList[i].name == object.name){
-                myList[i].rented = true;
-            }
-        }
-        for (let i = 0; i < myList.length; i++) {
-            var jsonString = JSON.stringify(myList[i])
-            const response2 = await fetch('/api/jetSki', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: jsonString,
-            });
-        }
+            body: JSON.stringify({
+                'vehicle-type': 'jetSki',
+                'vehicle-id': `${object._id}`
+            })
+        })
+        console.log(`responsecode: ${response.status}`)
+        //TODO: handle if response was successful!!
+
+        // console.log('began to rent')
+        // const response = await fetch('/api/jetSki', {
+        //     method: 'GET',
+        //     headers: {'content-type': 'application/json'}
+        // });
+        // console.log('finished getting')
+        // let myList = await response.json();
+        // var jsonVehicle = JSON.stringify({'vehicle':'jetski'})
+        // // console.log(jsonVehicle)
+        // const response3 = await fetch('/api/delete', {
+        //     method: 'DELETE',
+        //     headers: {'content-type': 'application/json'},
+        //     body: jsonVehicle
+        // });
+        // for (let i = 0; i < myList.length; i++){
+        //     if (myList[i].name == object.name){
+        //         myList[i].rented = true;
+        //     }
+        // }
+        // console.log('finished deleting')
+        // for (let i = 0; i < myList.length; i++) {
+        //     var jsonString = JSON.stringify(myList[i])
+        //     const response2 = await fetch('/api/jetSki', {
+        //     method: 'POST',
+        //     headers: {'content-type': 'application/json'},
+        //     body: jsonString,
+        //     });
+        // }
+        // console.log('finished renting')
     }
     //SNOWMOBILE
     if (object.vehicleType == "snowmobile"){

@@ -14,13 +14,21 @@ export function Search() {
 
   async function search(VT){
     // console.log("reached search")
-    var vehicleList = [];
+    let vehicleList = [];
     if (VT === "jetSkiArr") {
-        const response = await fetch('/api/jetSki', {
-            method: 'GET',
-            headers: {'content-type': 'application/json'}
-        });
+        const response = await fetch('api/vehicles', {
+          method: 'GET',
+          headers:  {
+            'content-type': 'application/json',
+            'vehicleType': 'jetSki'
+          }
+        })
         vehicleList = await response.json();
+        // const response = await fetch('/api/jetSki', {
+        //     method: 'GET',
+        //     headers: {'content-type': 'application/json'}
+        // });
+        // vehicleList = await response.json();
     }
     if (VT === "snowmobileArr") {
         const response = await fetch('/api/snowmobile', {
@@ -63,6 +71,7 @@ return (
     </main>
   );
 }
+
 
 
 
