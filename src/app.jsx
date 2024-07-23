@@ -9,7 +9,7 @@ import { Results } from './results/results';
 import { Search } from './search/search';
 import { Success } from './success/success';
 import { Vehicle } from './vehicle/vehicle';
-
+import { About } from './about/about';
 
 export default function App() {
     function logout() {
@@ -30,6 +30,11 @@ export default function App() {
                     </div>
                     {/* <nav className='navbar'> */}
                         <menu className='navbar'>
+                            <li className='nav-item'>
+                                <NavLink className='nav-lin' to='about'>
+                                    About
+                                </NavLink>
+                            </li>
                             <li className='nav-item'>
                                 <NavLink className='nav-link' to='search'>
                                     Search
@@ -75,6 +80,7 @@ export default function App() {
                     <Route path='/success' element={<Success />} exact />
                     <Route path='/vehicle' element={<Vehicle />} exact />
                     <Route path='/addVehicle' element={<AddVehicle />} exact />
+                    <Route path='/about' element={<About />} exact />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
                 <footer>

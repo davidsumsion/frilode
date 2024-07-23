@@ -1,7 +1,6 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const express = require('express');
-const app = express();
 const DB = require('./db/commonDB.js');
 const { peerProxy } = require('./db/peerProxy.js');
 const authCookieName = 'token';
@@ -9,7 +8,7 @@ const authCookieName = 'token';
 // The service port. The front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-// JSON body parsing
+const app = express();
 app.use(express.json());
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
@@ -17,9 +16,13 @@ app.use(express.static('public'));
 app.use(cookieParser());
 // Trust headers that are forwarded from the proxy so we can determine IP addresses
 app.set('trust proxy', true);
-// // Router for service endpoints
+
+
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+var apiSecureRouter = express.Router();
+app.use(`/api`, apiSecureRouter);
+
 
 ////////////////
 //AUTHENTICATION
@@ -66,14 +69,6 @@ apiRouter.get('/user/:email', async (req, res) => {
   res.status(404).send({ msg: 'Unknown' });
 });
 
-////////////////////
-//// VEHICLE ROUTERS
-////////////////////
-
-
-var apiSecureRouter = express.Router();
-app.use(`/api`, apiSecureRouter);
-
 apiSecureRouter.use(async (req, res, next) => {
   authToken = req.cookies[authCookieName];
   const user = await DB.getUserByToken(authToken);
@@ -108,67 +103,74 @@ apiSecureRouter.get('/vehicle', async (_req, res) =>{
 
 apiSecureRouter.get('/vehicles', async (req, res) => {
   //TODO: implement error handling for when vehicleType DNE
-  const vehicles = await DB.getVehicles(req.headers.vehicletype)
+  const vehicles = await DB.getVehiclesByClass(req.headers.vehicletype)
   res.send(vehicles)
 });
 
 apiSecureRouter.patch('/rentVehicle', async (req, res) => {
   //TODO: impoleement error handling
-  console.log('PATCH')
-  console.log(`request body: ${JSON.stringify(req.body)}`)
-  bodyObject = JSON.parse(req.body)
+  console.log('PATCH VEHICLE')
+  const bodyObject = JSON.parse(req.body);
   await DB.rentVehicle(bodyObject.vehicleId, bodyObject.vehicletype)
   res.sendStatus(200)
 })
 
+apiSecureRouter.post('/addVehicle', async (req, res) => {
+  // TODO: mplement error handling
+  console.log('POST VEHICLE')
+  const vehicle = JSON.parse(req.body);
+  await DB.createVehicle(vehicle);
+  res.sendStatus(200)
+})
 
-//////////////////
-///// Jet Ski ////
-apiSecureRouter.get('/jetSki', async (_req, res) => {
-    // res.send(jetSkiList);
-    console.log('get jet ski handler')
-    const jetSkis = await DB.getJetSkis();
-    res.send(jetSkis);
-  });
 
-apiSecureRouter.post('/jetSki', (req, res) => {
-  console.log('post jetski handler')
-    const jetSkiList = DB.postJetSki(req.body);
-    console.log(req.body);
-    // jetSkiList.push(req.body);
-    res.send(jetSkiList);
-});
+// //////////////////
+// ///// Jet Ski ////
+// apiSecureRouter.get('/jetSki', async (_req, res) => {
+//     // res.send(jetSkiList);
+//     console.log('get jet ski handler')
+//     const jetSkis = await DB.getJetSkis();
+//     res.send(jetSkis);
+//   });
 
-////////////////////
-//// Snowmobile ////
-apiSecureRouter.get('/snowmobile', async (_req, res) => {
-    const snowmobiles = await DB.getSnowmobiles();
-    res.send(snowmobiles);
-  });
+// apiSecureRouter.post('/jetSki', (req, res) => {
+//   console.log('post jetski handler')
+//     const jetSkiList = DB.postJetSki(req.body);
+//     console.log(req.body);
+//     // jetSkiList.push(req.body);
+//     res.send(jetSkiList);
+// });
 
-apiSecureRouter.post('/snowmobile', (req, res) => {
-    const snowmobileList = DB.postSnowmobile(req.body);
-  // console.log(req.body);
-  // jetSkiList.push(req.body);
-  // res.send(jetSkiList);
-    // console.log(req.body);
-    // snowmobileList.push(req.body);
-    res.send(snowmobileList);
-    });
+// ////////////////////
+// //// Snowmobile ////
+// apiSecureRouter.get('/snowmobile', async (_req, res) => {
+//     const snowmobiles = await DB.getSnowmobiles();
+//     res.send(snowmobiles);
+//   });
 
-////////////////
-//// Razor /////
-apiSecureRouter.get('/razor', async (_req, res) => {
-    const razorList = await DB.getRazors();
-    res.send(razorList);
-  });
+// apiSecureRouter.post('/snowmobile', (req, res) => {
+//     const snowmobileList = DB.postSnowmobile(req.body);
+//   // console.log(req.body);
+//   // jetSkiList.push(req.body);
+//   // res.send(jetSkiList);
+//     // console.log(req.body);
+//     // snowmobileList.push(req.body);
+//     res.send(snowmobileList);
+//     });
 
-apiSecureRouter.post('/razor', (req, res) => {
-  const razorList = DB.postRazor(req.body);
-    // console.log(req.body);
-    // razorList.push(req.body);
-    res.send(razorList);
-    });
+// ////////////////
+// //// Razor /////
+// apiSecureRouter.get('/razor', async (_req, res) => {
+//     const razorList = await DB.getRazors();
+//     res.send(razorList);
+//   });
+
+// apiSecureRouter.post('/razor', (req, res) => {
+//   const razorList = DB.postRazor(req.body);
+//     // console.log(req.body);
+//     // razorList.push(req.body);
+//     res.send(razorList);
+//     });
 
 
     
@@ -206,7 +208,8 @@ peerProxy(httpService);
 
 /*
 TODO:
- - Combine vehicle API's to serve a single function (adding a vehicle, renting a vehicle, deleting a vehicle)
-
+ - TEST::: Combine vehicle API's to serve a single function (adding a vehicle, renting a vehicle, deleting a vehicle)
+ - Object Validation before inserting into DB
+ - Error handling on API's
 
 */
