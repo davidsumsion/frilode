@@ -66,7 +66,7 @@ async function createUser(email, password) {
 //////////////
 // Vehicles //
 function getVehiclesByClass(vehicleType) {
-  return vehicleCollection({ vehicleType: vehicleType}).toArray()
+  return vehicleCollection.find({ vehicleType: vehicleType}).toArray()
 }
 
 async function rentVehicle(vehicleID, vehicleType) {

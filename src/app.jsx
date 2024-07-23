@@ -31,7 +31,7 @@ export default function App() {
                     {/* <nav className='navbar'> */}
                         <menu className='navbar'>
                             <li className='nav-item'>
-                                <NavLink className='nav-lin' to='about'>
+                                <NavLink className='nav-link' to='about'>
                                     About
                                 </NavLink>
                             </li>

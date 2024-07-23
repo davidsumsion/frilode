@@ -45,38 +45,13 @@ export function AddVehicle() {
     if (vehicleType=="razor") {image = razorImage}
 
     let newVehicle = new Vehicle(vehicleType, name, priceDay, priceHour, make, model, description, "");
-    if (vehicleType == "jetSki") { 
-        const jsonJetSkiString = JSON.stringify(newVehicle)
-        const response = await fetch('/api/jetSki', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: jsonJetSkiString,
-        });
-        // console.log("sent http")
-        const jetSkis = await response.json();
-    }    
-    if (vehicleType == "snowmobile") { 
-        const jsonSnowmobileString = JSON.stringify(newVehicle)
-        const response = await fetch('/api/snowmobile', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: jsonSnowmobileString,
-        });
-        const jetSkis = await response.json();
-    }    
-    if (vehicleType == "razor") { 
-        const jsonString = JSON.stringify(newVehicle)
-        const response = await fetch('/api/razor', {
-            method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: jsonString,
-        });
-        const jetSkis = await response.json();
-    }  
-    // Let other users know another vehicle was added
-    // broadcastEvent(getPlayerName(), vehicleType, 'added');
-
-    navigate('/success')
+    const vehicleString = JSON.stringify(newVehicle)
+    const response = await fetch('/api/addVehicle', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: vehicleString
+    });
+    if (response.status == 200) navigate('/success')
 }
 
   return (

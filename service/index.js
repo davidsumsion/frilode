@@ -118,8 +118,9 @@ apiSecureRouter.patch('/rentVehicle', async (req, res) => {
 apiSecureRouter.post('/addVehicle', async (req, res) => {
   // TODO: mplement error handling
   console.log('POST VEHICLE')
-  const vehicle = JSON.parse(req.body);
-  await DB.createVehicle(vehicle);
+  console.log(req.body.vehicleType)
+  console.log(`vehicle: ${req.body}`)
+  await DB.createVehicle(req.body);
   res.sendStatus(200)
 })
 
