@@ -33,14 +33,6 @@ const licenseCollection = db.collection('license');
   process.exit(1);
 });
 
-// This will asynchronously test the connection and exit the process if it fails
-(async function testConnection() {
-  await client.connect();
-  await db.command({ ping: 1 });
-})().catch((ex) => {
-  console.log(`Unable to connect to database with ${url} because ${ex.message}`);
-  process.exit(1);
-});
 
 ///////////
 // Users //
@@ -63,6 +55,18 @@ async function createUser(email, password) {
   return user;
 }
 
+async function updateUserInfo(updatedUserInfo, token) {
+  try {
+    // const user = getUserByToken(token)
+    // const newUser = {...updatedUserInfo, ...user}
+
+    const {phone, firstName, lastName, preferredName} = updatedUserInfo
+    await userCollection.updateOne({ token: token }, {$set:{firstName: firstName, lastName:lastName, preferredName: preferredName, phone: phone}})
+  } catch (e) {
+    throw new Error(e)
+  }
+}
+
 //////////////
 // Vehicles //
 function getVehiclesByClass(vehicleType) {
@@ -81,92 +85,20 @@ function createVehicle(vehicle) {
   vehicleCollection.insertOne(vehicle)
 }
 
-// Added for later functionality
-// function removeVehicle(vehicleID) {
-//   vehicleCollection.deleteOne(
-//       { _id: ObjectId(vehicleID) }
-//   )
-// }
-
-// OBSOLETE DRIVERS
-// async function getVehiclesByClass(vehicleType) {
-//   switch (vehicleType){
-//     case 'jetSki':
-//       const jetSkis = await jetSkiCollection.find({}).toArray();
-//       return jetSkis
-//   }
-// }
-// async function rentVehicle(vehicleID, vehicleType) {
-//   switch (vehicleType){
-//     case 'jetSki':
-//       await jetSkiCollection.updateOne(
-//         { _id: ObjectId(vehicleID)},
-//         { $set: {rented: true}}
-//       )
-//   }
-// }
-
-
-
-
-
-// function getJetSkis() {
-//     return jetSkiCollection.find({}).toArray();
-// }
-
-// function postJetSki(jetSki) {   
-//     jetSkiCollection.insertOne(jetSki)
-//     return jetSkiCollection.find({}).toArray();
-// }
-
-// async function getSnowmobiles() {
-//   return await snowmobileCollection.find({}).toArray();
-// }
-
-// function postSnowmobile(snowmobile) {
-//   snowmobileCollection.insertOne(snowmobile)
-//   return snowmobileCollection.find({}).toArray();
-// }
-
-
-// function getRazors() {
-//   return razorCollection.find({}).toArray();
-// }
-
-// function postRazor(razor) {
-//   razorCollection.insertOne(razor)
-//   return razorCollection.find({}).toArray();
-// }
-
-// function deleteVehicles(indicator){
-//   if (indicator == "jetski"){
-//     jetSkiCollection.deleteMany({});
-//   } else if (indicator == 'snowmobile') {
-//     snowmobileCollection.deleteMany({});
-//   } else if (indicator == 'razor') {
-//     razorCollection.deleteMany({});
-//   }
-  
-// }
-
-
+function removeVehicle(vehicleID) {
+  vehicleCollection.deleteOne(
+      { _id: ObjectId(vehicleID) }
+  )
+}
 
 
 
 module.exports = {
-  // current drivers
   getUser,
   getUserByToken,
   createUser,
   getVehiclesByClass,
   rentVehicle,
-  createVehicle
-  // obsolete drivers:
-  // getJetSkis,
-  // postJetSki,
-  // deleteVehicles,
-  // getSnowmobiles,
-  // postSnowmobile,
-  // getRazors,
-  // postRazor
-};
+  createVehicle,
+  updateUserInfo
+}

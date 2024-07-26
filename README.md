@@ -22,3 +22,7 @@
 ## future functionality
 - split menu options into logged in/logged out
 - beefier search (day/time, location within radius, )
+ - rented dates on objects 
+ - users collection with vehicles rented
+
+- users home page -- see rented vehicles

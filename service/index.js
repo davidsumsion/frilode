@@ -36,9 +36,7 @@ apiRouter.post('/auth/create', async (req, res) => {
     const user = await DB.createUser(req.body.email, req.body.password);
     setAuthCookie(res, user.token);
     console.log('New User Created')
-    res.send({
-      id: user._id,
-    });
+    res.send({ id: user._id, complete: false});
   }
 });
 
@@ -47,7 +45,8 @@ apiRouter.post('/auth/login', async (req, res) => {
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
-      res.send({ id: user._id });
+      const persInfo = (user.phone, user.firstName, user.preferredName, user.lastName) ? true : false
+      res.send({ id: user._id, complete: persInfo });
       return;
     }
   }
@@ -63,7 +62,8 @@ apiRouter.get('/user/:email', async (req, res) => {
   const user = await DB.getUser(req.params.email);
   if (user) {
     const token = req?.cookies.token;
-    res.send({ email: user.email, authenticated: token === user.token });
+    res.send({ email: user.email, authenticated: token === user.token, ...user });
+    // res.send({ authenticated: token === user.token, ...user });
     return;
   }
   res.status(404).send({ msg: 'Unknown' });
@@ -78,6 +78,18 @@ apiSecureRouter.use(async (req, res, next) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 });
+
+apiSecureRouter.patch('/updateuser', async (req, res) => {
+  const newUserInf = req.body
+  const token = req.cookies.token;
+  try {
+    await DB.updateUserInfo(newUserInf, token)
+    res.sendStatus(200)
+  } catch (e){
+    console.log(`ERROR: ${e.message}`)
+    res.sendStatus(500)
+  }
+})
 
 // Erase DB Call
 // apiSecureRouter.delete('/delete', (req, res) => {
@@ -117,9 +129,6 @@ apiSecureRouter.patch('/rentVehicle', async (req, res) => {
 
 apiSecureRouter.post('/addVehicle', async (req, res) => {
   // TODO: mplement error handling
-  console.log('POST VEHICLE')
-  console.log(req.body.vehicleType)
-  console.log(`vehicle: ${req.body}`)
   await DB.createVehicle(req.body);
   res.sendStatus(200)
 })

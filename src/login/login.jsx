@@ -25,18 +25,17 @@ export function Login() {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-  
+    const body = await response.json();
     if (response.ok) {
       localStorage.setItem('username', username);
-      navigate('/search')
+      if (body.complete) navigate('/search') 
+      else navigate('/updateUser')
     } else {
-      const body = await response.json();
       const modalEl = document.querySelector('#msgModal');
       modalEl.querySelector('.modal-body').textContent = `⚠ Error: ${body.msg}`;
       const msgModal = new bootstrap.Modal(modalEl, {});
       msgModal.show();
     }
-  
   }
 
   return (

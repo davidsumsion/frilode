@@ -10,6 +10,7 @@ import { Search } from './search/search';
 import { Success } from './success/success';
 import { Vehicle } from './vehicle/vehicle';
 import { About } from './about/about';
+import { UpdateUser } from './updateUser/updateUser'
 
 export default function App() {
     function logout() {
@@ -56,31 +57,29 @@ export default function App() {
                                 </NavLink>
                             </li>
                             <li className='nav-item'>
-                                <NavLink className='nav-link' to='vehicle'>
-                                    Vehicle
-                                </NavLink>
+                                <NavLink className='nav-link' to='vehicle'> Vehicle </NavLink>
                             </li>
                             <li className='nav-item'>
-                                <NavLink className='nav-link' to=''>
-                                Login
-                                </NavLink>
+                                <NavLink className='nav-link' to='updateUser'> Update User </NavLink>
                             </li>
                             <li className='nav-item'>
-                                <NavLink className='nav-link' onClick={() => logout()} to=''>
-                                Logout
-                                </NavLink>
+                                <NavLink className='nav-link' to=''> Login </NavLink>
+                            </li>
+                            <li className='nav-item'>
+                                <NavLink className='nav-link' onClick={() => logout()} to=''> Logout </NavLink>
                             </li>
                         </menu>
                     {/* </nav> */}
                 </header>
                 <Routes className='appContent'>
-                    <Route path='/' element={<Login />} exact />
-                    <Route path='/search' element={<Search />} exact />
-                    <Route path='/results' element={<Results />} exact />
-                    <Route path='/success' element={<Success />} exact />
-                    <Route path='/vehicle' element={<Vehicle />} exact />
-                    <Route path='/addVehicle' element={<AddVehicle />} exact />
+                    <Route path='/' element={< Login />} exact />
+                    <Route path='/search' element={< Search />} exact />
+                    <Route path='/results' element={< Results />} exact />
+                    <Route path='/success' element={< Success />} exact />
+                    <Route path='/vehicle' element={< Vehicle />} exact />
+                    <Route path='/addVehicle' element={< AddVehicle />} exact />
                     <Route path='/about' element={<About />} exact />
+                    <Route path='/updateUser' element={< UpdateUser />} exact />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
                 <footer>
