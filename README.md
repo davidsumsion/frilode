@@ -7,9 +7,10 @@
 ## Run Client LocallY:
 - npm run dev
 
-## MUUID
+## Docs
 [Mongo DB UUID Shortcuts/Formatting/selecting from db/](https://www.npmjs.com/package/uuid-mongodb)
-
+[Date Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+[Mantine Theme docs](https://mantine.dev/theming/mantine-provider/)
 
 ## Client TODO:
 - About page

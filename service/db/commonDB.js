@@ -14,7 +14,7 @@ const vehicleCollection = db.collection('vehicles');
 const licenseCollection = db.collection('license');
 
 // future collections
-// const bookingCollection = db.collection('booking');
+const bookingCollection = db.collection('booking');
 // const mediaCollection = db.collection('media');
 // const waiverCollection = db.collection('waiver');
 // const messagesCollection = db.collection('messages');
@@ -24,7 +24,6 @@ const licenseCollection = db.collection('license');
 // const snowmobileCollection = db.collection('snowmobile');
 // const razorCollection = db.collection('razor');
 
-
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
@@ -33,11 +32,11 @@ const licenseCollection = db.collection('license');
   process.exit(1);
 });
 
-
 ///////////
 // Users //
-function getUser(email) {
-    return userCollection.findOne({ email: email });
+function getUser(username) {
+    const user =  userCollection.findOne({ username: username });
+    return user
 }
 
 function getUserByToken(token) {
@@ -47,9 +46,15 @@ function getUserByToken(token) {
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
   const user = {
-    email: email,
+    username: email,
     password: passwordHash,
     token: uuid.v4(),
+    phone: "",
+    firstName: "",
+    lastName: "",
+    preferredName: "",
+    rentedVehicles: {},
+    ownedVehicles: {}
   };
   await userCollection.insertOne(user);
   return user;
@@ -57,11 +62,11 @@ async function createUser(email, password) {
 
 async function updateUserInfo(updatedUserInfo, token) {
   try {
-    // const user = getUserByToken(token)
-    // const newUser = {...updatedUserInfo, ...user}
-
     const {phone, firstName, lastName, preferredName} = updatedUserInfo
-    await userCollection.updateOne({ token: token }, {$set:{firstName: firstName, lastName:lastName, preferredName: preferredName, phone: phone}})
+    await userCollection.updateOne(
+      { token: token }, 
+      {$set:{firstName: firstName, lastName:lastName, preferredName: preferredName, phone: phone}}
+      )
   } catch (e) {
     throw new Error(e)
   }
@@ -73,7 +78,7 @@ function getVehiclesByClass(vehicleType) {
   return vehicleCollection.find({ vehicleType: vehicleType}).toArray()
 }
 
-async function rentVehicle(vehicleID, vehicleType) {
+async function rentVehicle(vehicleID) {
   await vehicleCollection.updateOne(
     {_id: ObjectId(vehicleID)},
     { $set: {rented: true}}
@@ -92,6 +97,25 @@ function removeVehicle(vehicleID) {
 }
 
 
+/////////////
+// booking //
+async function createBooking(userId, vehicleId, reservationDates) {
+  const booking = {
+    userId: userId,
+    vehicleId: vehicleId,
+    reservationDates: reservationDates
+  }
+  await bookingCollection.insertOne(booking)
+  return booking._id
+}
+
+function getBooking(bookingId) {
+  const booking = bookingCollection.findOne( {_id : bookingId} )
+  return JSON.stringify(booking)
+}
+
+
+
 
 module.exports = {
   getUser,
@@ -100,5 +124,7 @@ module.exports = {
   getVehiclesByClass,
   rentVehicle,
   createVehicle,
-  updateUserInfo
+  updateUserInfo,
+  createBooking,
+  getBooking
 }

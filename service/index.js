@@ -29,11 +29,14 @@ app.use(`/api`, apiSecureRouter);
 ////////////////
 
 apiRouter.post('/auth/create', async (req, res) => {
-  if (await DB.getUser(req.body.email)) {
+  console.log(req.body.username)
+  console.log(req.body.username)
+  const existingUser = await DB.getUser(req.body.username)
+  if (existingUser) {
     console.log('Existing User')
     res.status(409).send({ msg: 'Existing User' });
   } else {
-    const user = await DB.createUser(req.body.email, req.body.password);
+    const user = await DB.createUser(req.body.username, req.body.password);
     setAuthCookie(res, user.token);
     console.log('New User Created')
     res.send({ id: user._id, complete: false});
@@ -41,7 +44,7 @@ apiRouter.post('/auth/create', async (req, res) => {
 });
 
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = await DB.getUser(req.body.email);
+  const user = await DB.getUser(req.body.username);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
@@ -59,7 +62,7 @@ apiRouter.delete('/auth/logout', (_req, res) => {
 });
 
 apiRouter.get('/user/:email', async (req, res) => {
-  const user = await DB.getUser(req.params.email);
+  const user = await DB.getUser(req.params.username);
   if (user) {
     const token = req?.cookies.token;
     res.send({ email: user.email, authenticated: token === user.token, ...user });
@@ -120,15 +123,15 @@ apiSecureRouter.get('/vehicles', async (req, res) => {
 });
 
 apiSecureRouter.patch('/rentVehicle', async (req, res) => {
-  //TODO: impoleement error handling
+  //TODO: impolement error handling
   console.log('PATCH VEHICLE')
-  const bodyObject = JSON.parse(req.body);
-  await DB.rentVehicle(bodyObject.vehicleId, bodyObject.vehicletype)
+  const vehicleId = req.body['vehicle-id'];
+  await DB.rentVehicle(vehicleId)
   res.sendStatus(200)
 })
 
 apiSecureRouter.post('/addVehicle', async (req, res) => {
-  // TODO: mplement error handling
+  // TODO: implement error handling
   await DB.createVehicle(req.body);
   res.sendStatus(200)
 })

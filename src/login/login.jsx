@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './login.css';
-
+import './login.css'
 
 export function Login() {
   const [username, updateUsername] = React.useState("");
@@ -20,7 +19,7 @@ export function Login() {
   async function loginOrCreate(endpoint) {
     const response = await fetch(endpoint, {
       method: 'post',
-      body: JSON.stringify({ email: username, password: password }),
+      body: JSON.stringify({ username: username, password: password }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
@@ -33,7 +32,7 @@ export function Login() {
     } else {
       const modalEl = document.querySelector('#msgModal');
       modalEl.querySelector('.modal-body').textContent = `⚠ Error: ${body.msg}`;
-      const msgModal = new bootstrap.Modal(modalEl, {});
+      const msgModal = new Bootstrap.Modal(modalEl, {});
       msgModal.show();
     }
   }
@@ -57,7 +56,8 @@ export function Login() {
             </div>
             <div id="createAccount">
               <label id="createAccountText">Don't have an account? Create one below:</label>
-              <button className="btn btn-primary" onClick={() => createUser()}>Create Account</button>
+              {/* <button className="btn btn-primary" onClick={() => createUser()}>Create Account</button> */}
+              <button className="btn btn-primary" onClick={() => navigate('/createAccount')}>Create Account</button>
             </div>
             <div className="modal fade" id="msgModal" tabIndex="-1">
               <div className="modal-dialog modal-dialog-centered">

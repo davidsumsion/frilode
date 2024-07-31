@@ -28,7 +28,7 @@ export function Results() {
   }
 
   
-  function rent(myVehicle) {
+  function viewVehicle(myVehicle) {
     localStorage.setItem("selectedVehicle", JSON.stringify(myVehicle));
     //change windows
     navigate('/vehicle')
@@ -40,8 +40,8 @@ export function Results() {
   if (data.length){
     for (let i = 0; i < data.length; i++){
       // jsonObject = JSON.parse(data[i]);
-      const jsonObject = data[i];
-      const tempVehicle = new Vehicle(jsonObject.vehicleType, jsonObject.name, jsonObject.priceDay, jsonObject.priceHour, jsonObject.make, jsonObject.model, jsonObject.description, jsonObject.image, jsonObject.rented)
+      const tempVehicle = data[i];
+      // const tempVehicle = new Vehicle(jsonObject.vehicleType, jsonObject.name, jsonObject.priceDay, jsonObject.priceHour, jsonObject.make, jsonObject.model, jsonObject.description, jsonObject.image, jsonObject.rented)
       queryResultsDisplay.push(
         <div className="card">
               <img className="market-photos" src={tempVehicle.image} alt={tempVehicle.name}></img>
@@ -52,7 +52,7 @@ export function Results() {
                   Make: {tempVehicle.make}
                   Model: {tempVehicle.model}
               </p>
-              <button type="submit" className="btn btn-primary btn-sm" onClick={() => rent(tempVehicle)} >See More Information</button>        
+              <button type="submit" className="btn btn-primary btn-sm" onClick={() => viewVehicle(tempVehicle)} >See More Information</button>        
         </div>
       );      
     }
