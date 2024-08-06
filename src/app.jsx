@@ -11,65 +11,70 @@ import { Success } from './success/success';
 import { Vehicle } from './vehicle/vehicle';
 import { About } from './about/about';
 import { UpdateUser } from './updateUser/updateUser'
+import { createTheme, MantineProvider, Title } from '@mantine/core';
+import '@mantine/core/styles.css';
+
+const theme = createTheme({
+    /** Put your mantine theme override here */
+});
 
 export default function App() {
     function logout() {
         // console.log("logging out")
         localStorage.removeItem('username');
         fetch(`/api/auth/logout`, {
-          method: 'delete',
+            method: 'delete',
         });
-      }
+    }
 
     return (
-        <BrowserRouter className='app'>
+        <MantineProvider theme={theme}>
+            <BrowserRouter className='app'>
                 <header className="mainHeader">
                     <div className='brandName'>
-                        <h1>
+                        <Title>
                             frilode
-                        </h1>
+                        </Title>
                     </div>
-                    {/* <nav className='navbar'> */}
-                        <menu className='navbar'>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='about'>
-                                    About
-                                </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='search'>
-                                    Search
-                                </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='results'>
-                                    Results
-                                </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='addVehicle'>
-                                    Add Vehicle
-                                </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='success'>
-                                    Success
-                                </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='vehicle'> Vehicle </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to='updateUser'> Update User </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' to=''> Login </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink className='nav-link' onClick={() => logout()} to=''> Logout </NavLink>
-                            </li>
-                        </menu>
-                    {/* </nav> */}
+                    <menu className='navbar'>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='about'>
+                                About
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='search'>
+                                Search
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='results'>
+                                Results
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='addVehicle'>
+                                Add Vehicle
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='success'>
+                                Success
+                            </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='vehicle'> Vehicle </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='updateUser'> Update User </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to=''> Login </NavLink>
+                        </li>
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' onClick={() => logout()} to=''> Logout </NavLink>
+                        </li>
+                    </menu>
                 </header>
                 <Routes className='appContent'>
                     <Route path='/' element={< Login />} exact />
@@ -84,13 +89,15 @@ export default function App() {
                 </Routes>
                 <footer>
                 </footer>
-        </BrowserRouter>
+            </BrowserRouter>
+        </MantineProvider>
+
     )
 }
 
 
 function NotFound() {
     return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
-  }
+}
 
 

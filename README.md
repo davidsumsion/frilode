@@ -11,8 +11,11 @@
 [Mongo DB UUID Shortcuts/Formatting/selecting from db/](https://www.npmjs.com/package/uuid-mongodb)
 [Date Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
 [Mantine Theme docs](https://mantine.dev/theming/mantine-provider/)
+[Mantine Presentation](https://ui.mantine.dev/)
+[Mantine Tutorial](https://www.youtube.com/watch?v=57vs7TLth74)
 
 ## Client TODO:
+- Restructure to be Mantime
 - About page
 - update API's to reflect new service API's
 
