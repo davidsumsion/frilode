@@ -2,6 +2,8 @@ import React from 'react';
 import './addVehicle.css'
 import { useNavigate } from 'react-router-dom';
 import { createVehicle } from '../api/vehicleAPI.js'
+import { Card, Title, Button, TextInput, Textarea, Image } from '@mantine/core';
+import { Select } from '@mantine/core';
 
 
 export function AddVehicle() {
@@ -11,92 +13,107 @@ export function AddVehicle() {
   const [priceDay, updatePriceDay] = React.useState("");
   const [priceHour, updatePriceHour] = React.useState("");
   const [make, updateMake] = React.useState("");
-  const [model, updateModel]  = React.useState("");
+  const [model, updateModel] = React.useState("");
   const [description, updateDescription] = React.useState("");
+  const [selectedImage, setSelectedImage] = React.useState(null)
   const jetSkiImage = "https://www.furycat.com/images/jet-ski-tour.jpg";
   const snowmobileImage = "https://www.snowmobile.com/blog/wp-content/uploads/2019/02/2020-Arctic-Cat-Riot-Powder.jpg";
   const razorImage = "https://i.pinimg.com/originals/95/5b/fb/955bfb13e33dbc84f4de0048804da6e5.jpg";
 
   class Vehicle {
-    constructor(vehicleType, name, priceDay, priceHour, make, model, description, image, rented=false){
-        this.vehicleType = vehicleType;
-        this.name = name;
-        this.priceDay = priceDay;
-        this.priceHour = priceHour;
-        this.make = make;
-        this.model = model;
-        this.description = description;
-        this.image = image;
-        this.rented = rented;
+    constructor(vehicleType, name, priceDay, priceHour, make, model, description, image, rented = false) {
+      this.vehicleType = vehicleType;
+      this.name = name;
+      this.priceDay = priceDay;
+      this.priceHour = priceHour;
+      this.make = make;
+      this.model = model;
+      this.description = description;
+      this.image = image;
+      this.rented = rented;
     }
-    getName(){ return this.name; }
-    getPriceDay(){ return this.priceDay; }
-    getPriceHour(){ return this.priceHour; }
-    getMake(){ return this.make; }
-    getModel(){ return this.model; }
-    getDescription(){ return this.description; }
-    getImage(){ return this.image; }
-}
+    getName() { return this.name; }
+    getPriceDay() { return this.priceDay; }
+    getPriceHour() { return this.priceHour; }
+    getMake() { return this.make; }
+    getModel() { return this.model; }
+    getDescription() { return this.description; }
+    getImage() { return this.image; }
+  }
 
-  async function addNewVehicle(){
-    // console.log("made it to add new vehicle")
-    var image = "";
-    if (vehicleType=="jetSki") {image = jetSkiImage}
-    if (vehicleType=="snowmobile") {image = snowmobileImage}
-    if (vehicleType=="razor") {image = razorImage}
+  async function addNewVehicle() {
+    var image = null;
+    switch (vehicleType) {
+      case 'jetSki':
+        image = jetSkiImage;
+        break;
+      case 'snowmobile':
+        image = snowmobileImage;
+        break;
+      case 'razor':
+        image = razorImage;
+        break;
+    }
 
-    let newVehicle = new Vehicle(vehicleType, name, priceDay, priceHour, make, model, description, "");
+    let newVehicle = new Vehicle(vehicleType, name, priceDay, priceHour, make, model, description, image);
     const response = await createVehicle(newVehicle)
     if (response.ok) navigate('/success')
-}
+  }
 
   return (
-    <main className='container-fluid text-center'>
-      <div>
-        <h2> SkiDoo 2021 </h2>
-          <h5>
-            Input Your Vehicles Information: 
-          </h5>
+    <main className='singleCardPage'>
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Title>Input Your Vehicles Information:</Title>
 
-          <div className="mb-3" >
-            <label htmlFor="vehicleType" className="form-label" >Vehicle Type: jetSki, snowmobile, razor. Must be exact.</label>
-            <input className="form-control" id="vehicleType" onChange={(e) => updateVehicleType(e.target.value) } value={vehicleType} placeholder="jetSki, snowmobile, razor" ></input>
-          </div>
-          
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label" >Name Your Vehicle</label>
-            <input className="form-control" id="name" onChange={(e) => updateName(e.target.value) } value={name} placeholder="Name"></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="PriceDay" className="form-label">Price/Day</label>
-            <input className="form-control" id="PriceDay" onChange={(e) => updatePriceDay(e.target.value) } value={priceDay} placeholder="$Price/Day"></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="PriceHour" className="form-label">Price/Hour</label>
-            <input className="form-control" id="PriceHour" onChange={(e) => updatePriceHour(e.target.value) } value={priceHour} placeholder="$Price/Hour"></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="make" className="form-label">Make</label>
-            <input className="form-control" id="make" onChange={(e) => updateMake(e.target.value) } value={make} placeholder="Make"></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="model" className="form-label">Model</label>
-            <input className="form-control" id="model" onChange={(e) => updateModel(e.target.value) } value={model} placeholder="Model"></input>
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="description" className="form-label">Description</label>
-            <input className="form-control" id="description" onChange={(e) => updateDescription(e.target.value) } value={description} placeholder="Description"></input>
-          </div>
-          <br></br>
+        <div className="singleCardElements" >
+          <Select
+            radius='lg'
+            label="Vehicle Type:"
+            placeholder="Pick Vehicle Type"
+            data={['jetSki', 'snowmobile', 'razor']}
+            clearable
+            onChange={(value) => updateVehicleType(value)} value={vehicleType}
+          />
+          <TextInput radius='lg' label='Name' placeholder='Name' onChange={(e) => updateName(e.target.value)} value={name} />
+          <TextInput radius='lg' label='Price/Day' placeholder='Price/Day' onChange={(e) => updatePriceDay(e.target.value)} value={priceDay} />
+          <TextInput radius='lg' label='Price/Hour' placeholder='Price/Hour' onChange={(e) => updatePriceHour(e.target.value)} value={priceHour} />
+          <TextInput radius='lg' label='Make' placeholder='Make' onChange={(e) => updateMake(e.target.value)} value={make} />
+          <TextInput radius='lg' label='Model' placeholder='Model' onChange={(e) => updateModel(e.target.value)} value={model} />
+          <Textarea radius='lg' label='Description' placeholder='Description' onChange={(e) => updateDescription(e.target.value)} value={description} />
+          {/* Conditionally render the selected image if it exists */}
+          <div>
+          {selectedImage && (
             <div>
-              <button className="btn btn-primary" onClick={() => addNewVehicle()}>Add My Vehicle</button>
-          </div>
+              {/* Display the selected image */}
+              <Image
+                alt="not found"
+                width={"250px"}
+                src={'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fpolaris-rzr&psig=AOvVaw3tHkw78znJKgHQKDwgTw6f&ust=1723603980182000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNj1tqn78IcDFQAAAAAdAAAAABAJ'}
+              />
+              <br /> <br />
+              {/* Button to remove the selected image */}
+              <button onClick={() => setSelectedImage(null)}>Remove</button>
+            </div>
+          )}
+
+          <br />
+
+          {/* Input element to select an image file */}
+          <input
+            type="file"
+            name="myImage"
+            // Event handler to capture file selection and update the state
+            onChange={(event) => {
+              console.log(event.target.files[0]); // Log the selected file
+              setSelectedImage(event.target.files[0]); // Update the state with the selected file
+            }}
+          />
         </div>
-    </main>
+      </div>
+      <div>
+        <Button radius='lg' onClick={() => addNewVehicle()}>Add My Vehicle</Button>
+      </div>
+    </Card>
+    </main >
   );
 }

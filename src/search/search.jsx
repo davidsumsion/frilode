@@ -1,38 +1,46 @@
 import React from 'react';
+import './search.css'
 import { useNavigate } from 'react-router-dom';
 import { getVehiclesByType } from '../api/vehicleAPI';
-
+import { Title, Card, Select, Button, Text} from '@mantine/core'
 
 export function Search() {
   const navigate = useNavigate();
+  const [vehicleType, updateVehicleType] = React.useState("");
 
-  const handleDropdownToggle = () => {
-    const dropdownMenu = document.getElementById('vehicleTypeButton');
-    dropdownMenu.classList.toggle('show');
-  };
+  // const handleDropdownToggle = () => {
+  //   const dropdownMenu = document.getElementById('vehicleTypeButton');
+  //   dropdownMenu.classList.toggle('show');
+  // };
 
   // fakeData();
 
-  async function search(vehicleType){
+  async function search() {
     const response = await getVehiclesByType(vehicleType)
     const vehicleList = await response.json();
     localStorage.setItem("queryResults", JSON.stringify(vehicleList))
     if (response.ok) navigate('/results')
-};
+  };
 
-return (
-    <main className='container-fluid text-center'>
-      <h2> Search</h2>
-      <div className="btn-group">
-            <button className="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" onClick={handleDropdownToggle} aria-expanded="false">
-              What do you want to rent?
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton" id="vehicleTypeButton">
-              <li><a className="dropdown-item" id="jetSki" onClick={() => search('jetSki')}>Jet Ski</a></li>
-              <li><a className="dropdown-item" id="snowmobile" onClick={() => search('snowmobile')}>Snowmobile</a></li>
-              <li><a className="dropdown-item" id="razor" onClick={() => search('razor')}>Razor</a></li>
-            </ul>
-          </div>
+  return (
+    <main className='mainPage'>
+      
+      <Card shadow="sm" padding="lg" radius="md" height={400} withBorder>
+        <div className='cardItems'>
+        <Title> Search</Title>
+        <Text size='xl'>What do you want to Rent?</Text>
+        <Select
+            radius='lg'
+            label="Vehicle Type:"
+            placeholder="Pick Vehicle Type"
+            data={['jetSki', 'snowmobile', 'razor']}
+            clearable
+            onChange={(value) => updateVehicleType(value)} value={vehicleType}
+          />
+          <Button radius='lg' onClick={() => search()}> Search </Button>
+        </div>
+        </Card>
+
     </main>
   );
 }

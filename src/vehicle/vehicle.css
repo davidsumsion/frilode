@@ -1,34 +1,15 @@
-header{
-  background-color: #c49f00;
-}
-.container {
-  height: 100%;
-  display: grid;
-}
-.card {
-  flex: 1 1 calc(30% - 20px);
-border: #333 solid thick;
-border-radius: 1em;
-text-align: center;
-}
-.card.long {
-grid-column: span 2;
-text-align: left;
-padding: 20px;
+
+
+.vehicleInfo {
+  display: flex;
+  flex-direction: column;
 }
 
-img.market-photos {
-border-radius: 10px;
+.cardItems {
+  display: flex;
+  flex-flow: column;
+  height: 400px;
+  justify-content: center;
+  flex: 1;
 }
 
-main h3 {
-font-size: 20px;
-padding: 10px;
-
-}
-main {
-padding: 50px;
-}
-main h2 {
-padding: 20px;
-}

@@ -33,7 +33,11 @@
   main h2 {
     padding: 20px;
   }
-  .mb-3 {
+  .singleCardElements {
     padding:20px
 
+  }
+  .singleCardPage {
+      display: flex;
+      justify-content: center;
   }

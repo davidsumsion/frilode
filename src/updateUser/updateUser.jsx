@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './updateUser.css';
+import { Card, Title, TextInput } from '@mantine/core'
 
 
 export function UpdateUser() {
@@ -29,30 +29,35 @@ export function UpdateUser() {
 
   return (
     <div className="mainPage">
-      <div className="UpdateUserMenu">
-            <h2 id="title">Update Personal Information:</h2>
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+            <Title>Update Personal Information:</Title>
             <div className="PersonalItems">
                 <div className="PersonalItem">
-                  <label className="form-label">Mobile Phone Number:</label>
-                  <input type="phone" className="form-control" id="phone" onChange={(e) => updatePhone(e.target.value) } value={phone} placeholder="(XXX)-XXX-XXXX"></input>
+                  <TextInput radius='lg' label='Mobile Phone Number' placeholder='(XXX)-XXX-XXXX' onChange={(e) => updatePhone(e.target.value)} value={phone}/>
+                  {/* <label className="form-label">Mobile Phone Number:</label>
+                  <input type="phone" className="form-control" id="phone" onChange={(e) => updatePhone(e.target.value) } value={phone} placeholder="(XXX)-XXX-XXXX"></input> */}
                 </div>
                 <div className="PersonalItem">
-                  <label className="form-label">First Name:</label>
-                  <input type="text" className="form-control" id="firstName" onChange={(e) => updateFirstName(e.target.value) } value={firstName} placeholder="First Name"></input>
+                  <TextInput radius='lg' label='First Name' placeholder='First Name' onChange={(e) => updateFirstName(e.target.value)} value={firstName}/>
+                  {/* <label className="form-label">First Name:</label>
+                  <input type="text" className="form-control" id="firstName" onChange={(e) => updateFirstName(e.target.value) } value={firstName} placeholder="First Name"></input> */}
                 </div>
                 <div className="PersonalItem">
-                  <label className="form-label">Preferred Name:</label>
-                  <input type="text" className="form-control" id="preferredName" onChange={(e) => updatePreferredName(e.target.value) } value={preferredName} placeholder="Preferred Name"></input>
+                  <TextInput radius='lg' label='Preferred Name' placeholder='prefferredName' onChange={(e) => updatePreferredName(e.target.value)} value={preferredName}/>
+                  {/* <label className="form-label">Preferred Name:</label>
+                  <input type="text" className="form-control" id="preferredName" onChange={(e) => updatePreferredName(e.target.value) } value={preferredName} placeholder="Preferred Name"></input> */}
                 </div>
                 <div className="PersonalItem">
-                  <label className="form-label">Last Name:</label>
-                  <input type="text" className="form-control" id="lastName" onChange={(e) => updateLastName(e.target.value) } value={lastName} placeholder="Last Name"></input>
+                  <TextInput radius='lg' label='Last Name' placeholder='Last Name' onChange={(e) => updateLastName(e.target.value)} value={lastName}/>
+
+                  {/* <label className="form-label">Last Name:</label>
+                  <input type="text" className="form-control" id="lastName" onChange={(e) => updateLastName(e.target.value) } value={lastName} placeholder="Last Name"></input> */}
                 </div>
                 <div className="PersonalItem">
                   <button className="btn btn-primary" onClick={() => updateUser()}>Update My Info</button>
                 </div>
             </div>
-      </div>
+      </Card>
     </div>
   );
 }

@@ -1,12 +1,3 @@
-.loginMenu {
-    border: 3px solid #333;
-    border-radius: 20px;
-    margin: 50px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-}
 .form-label {
     font-size: 12px;
 }

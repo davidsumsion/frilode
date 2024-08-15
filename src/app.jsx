@@ -11,6 +11,7 @@ import { Success } from './success/success';
 import { Vehicle } from './vehicle/vehicle';
 import { About } from './about/about';
 import { UpdateUser } from './updateUser/updateUser'
+import { CreateAccount } from './login/createAccount'
 import { createTheme, MantineProvider, Title } from '@mantine/core';
 import '@mantine/core/styles.css';
 
@@ -78,6 +79,7 @@ export default function App() {
                 </header>
                 <Routes className='appContent'>
                     <Route path='/' element={< Login />} exact />
+                    <Route path='/createAccount' element={< CreateAccount />} exact />
                     <Route path='/search' element={< Search />} exact />
                     <Route path='/results' element={< Results />} exact />
                     <Route path='/success' element={< Success />} exact />
@@ -97,7 +99,7 @@ export default function App() {
 
 
 function NotFound() {
-    return <main className='container-fluid bg-secondary text-center'>404: Return to sender. Address unknown.</main>;
+    return <main className='container-fluid text-center'>404: Return to sender. Address unknown.</main>;
 }
 
 
