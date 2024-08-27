@@ -66,7 +66,7 @@ export function PasswordStrengthInput() {
             onChange={(event) => setValue(event.currentTarget.value)}
           />
         </div>
-      </Popover.Target> 
+      </Popover.Target>
       <Popover.Dropdown>
         <Progress color={color} value={strength} size={5} mb="xs" />
         <PasswordRequirement label="Includes at least 6 characters" meets={value.length > 5} />

@@ -19,3 +19,11 @@ export const getVehiclesByType = async (vehicleType) => {
     })
     return response
 }
+
+export const rentVehicle = async (vehicle) => {
+    return await fetch('/api/rentVehicle', {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ 'vehicle-id': vehicle._id })
+    })
+}

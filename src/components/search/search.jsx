@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getVehiclesByType } from '../../api/vehicleAPI';
 import { DatePicker } from '@mantine/dates';
 import { Title, Card, Select, Button, Text } from '@mantine/core';
-import '../components/shared/style.css'
+import '../shared/style.css'
 
 export function Search() {
   const navigate = useNavigate();

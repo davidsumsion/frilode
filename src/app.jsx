@@ -4,16 +4,17 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { AddVehicle } from './addVehicle/addVehicle';
-import { Login } from './login/login.jsx';
-import { Results } from './results/results';
-import { Search } from './search/search';
+import { Login } from './components/login/login.jsx';
+import { CreateAccount } from './components/login/createAccount'
+import { Results } from './components/results/results';
+import { Search } from './components/search/search';
 import { Success } from './success/success';
-import { Vehicle } from './vehicle/vehicle';
+import { Vehicle } from './components/vehicle/vehicle';
 import { About } from './about/about';
 import { UpdateUser } from './updateUser/updateUser'
-import { CreateAccount } from './login/createAccount'
 import { createTheme, MantineProvider, Title } from '@mantine/core';
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 const theme = createTheme({
     /** Put your mantine theme override here */

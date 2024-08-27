@@ -1,33 +1,22 @@
 import React from 'react';
-// import './vehicle.css'
+import '../shared/style.css'
 import { useNavigate } from 'react-router-dom';
 import { Card, Title, Button, Text, Image } from '@mantine/core'
-
-
+import { rentVehicle } from '../../api/vehicleAPI'
 
 export function Vehicle() {
   const lowTextProps = {
     size: 'lg'
   }
-
+  const vehicle = JSON.parse(localStorage.getItem("selectedVehicle"));
   const navigate = useNavigate();
 
   async function rent() {
-    console.log(localStorage.getItem("selectedVehicle"))
-    var object = JSON.parse(localStorage.getItem("selectedVehicle"));
-    object.rented = true;
-    const response = await fetch('/api/rentVehicle', {
-      method: 'PATCH',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ 'vehicle-id': object._id })
-    })
-    console.log(`responsecode: ${response.status}`)
-    //TODO: handle if response was successful!!
+    vehicle.rented = true;
+    const response = await rentVehicle(vehicle)
     if (response.ok) navigate('/success')
-    // else throw error     
+    // TODO: else throw error
   }
-
-  const vehicle = JSON.parse(localStorage.getItem("selectedVehicle"));
 
   return (
     <main className='mainPage'>
