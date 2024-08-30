@@ -7,5 +7,11 @@ export const loginOrCreateUser = async (type, username, password) => {
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
-      return await response.json();
+}
+
+
+export const logout = () => {
+  fetch(`/api/auth/logout`, {
+      method: 'delete',
+  });
 }
