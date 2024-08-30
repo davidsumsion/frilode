@@ -3,15 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { AddVehicle } from './addVehicle/addVehicle';
-import { Login } from './components/login/login.jsx';
-import { CreateAccount } from './components/login/createAccount'
-import { Results } from './components/results/results';
-import { Search } from './components/search/search';
-import { Success } from './success/success';
-import { Vehicle } from './components/vehicle/vehicle';
-import { About } from './about/about';
-import { UpdateUser } from './updateUser/updateUser'
+import { AddVehicle } from './pages/addVehicle/addVehicle';
+import { Login } from './pages/login/login.jsx';
+import { CreateAccount } from './pages/login/createAccount'
+import { Results } from './pages/results/results';
+import { Search } from './pages/search/search';
+import { Success } from './pages/success/success';
+import { Vehicle } from './pages/vehicle/vehicle';
+import { About } from './pages/about/about';
+import { UpdateUser } from './pages/updateUser/updateUser'
 import { createTheme, MantineProvider, Title } from '@mantine/core';
 import '@mantine/core/styles.css';
 import '@mantine/dates/styles.css';

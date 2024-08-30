@@ -1,7 +1,7 @@
 import React from 'react';
 import './addVehicle.css'
 import { useNavigate } from 'react-router-dom';
-import { createVehicle } from '../api/vehicleAPI.js'
+import { createVehicle } from '../../api/vehicleAPI.js'
 import { Card, Title, Button, TextInput, Textarea, Image } from '@mantine/core';
 import { Select } from '@mantine/core';
 
