@@ -9,9 +9,18 @@ export const loginOrCreateUser = async (type, username, password) => {
       });
 }
 
-
 export const logout = () => {
   fetch(`/api/auth/logout`, {
       method: 'delete',
+  });
+}
+
+export const updateUserInfo = async (phone, firstName, preferredName, lastName) => {
+  return await fetch('api/updateuser', {
+    method: 'PATCH',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({ phone, firstName, preferredName, lastName})
   });
 }

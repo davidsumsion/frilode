@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../shared/style.css'
 import { Card, Title, PasswordInput, Button, TextInput, Text } from '@mantine/core';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal } from 'react-bootstrap'
 import { loginOrCreate } from './login.js';
+import { ErrorMessage } from '../shared/error.jsx';
 
 export function Login() {
   const [username, updateUsername] = React.useState("");
@@ -36,17 +36,8 @@ export function Login() {
           <Text size='sm' c='dimmed'>Don't have an account? Create one:</Text>
           <Button radius='lg' onClick={() => navigate('/createAccount')}>Create Account</Button>
         </div>
-        <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Error</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>{modalMessage}</Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setShow(false)}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+
+        <ErrorMessage show={show} modalMessage={modalMessage} setShow={setShow}></ErrorMessage>
       </Card>
     </div>
   );

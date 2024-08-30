@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Title, Button, TextInput } from '@mantine/core';
 import { PasswordStrengthInput } from './passwordRequirement'
-import { Modal } from 'react-bootstrap'
 import { loginOrCreate } from './login.js';
+import { ErrorMessage } from '../shared/error.jsx';
 import '../shared/style.css'
 
 export function CreateAccount() {
@@ -33,18 +33,9 @@ export function CreateAccount() {
             <Button radius='lg' onClick={() => createUser()}>Create Account</Button>
           </div>
         </div>
-        <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Error</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>{modalMessage}</Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setShow(false)}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </Card>
+
+      <ErrorMessage show={show} modalMessage={modalMessage} setShow={setShow}></ErrorMessage>
     </div>
   );
 }

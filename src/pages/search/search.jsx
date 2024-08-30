@@ -4,18 +4,28 @@ import { getVehiclesByType } from '../../api/vehicleAPI';
 import { DatePicker } from '@mantine/dates';
 import { Title, Card, Select, Button, Text } from '@mantine/core';
 import '../shared/style.css'
+import '../shared/error.jsx'
+import { ErrorMessage } from '../shared/error.jsx';
 
 export function Search() {
   const navigate = useNavigate();
+  const selectableVehicles = ['jetSki', 'snowmobile', 'razor']
   const [vehicleType, updateVehicleType] = React.useState("");
   const [startDate, setStartDate] = React.useState(null);
   const [returnDate, setReturnDate] = React.useState(null);
+  const [show, setShow] = React.useState("");
+  const [modalMessage, setModalMessage] = React.useState("");
 
   async function search() {
     const response = await getVehiclesByType(vehicleType)
-    const vehicleList = await response.json();
-    localStorage.setItem("queryResults", JSON.stringify(vehicleList))
-    if (response.ok) navigate('/results')
+    const body = await response.json();
+    if (response.ok) {
+      localStorage.setItem("queryResults", JSON.stringify(body))
+      navigate('/results')
+    } else {
+      setModalMessage(`⚠ Error: ${body.msg}`)
+      setShow(true);
+    }
   };
 
   return (
@@ -26,7 +36,7 @@ export function Search() {
           <div className='horizontalDisplay'>
             <div className='horizontalDisplayComponents'>
               <Text size='md'>Vehicle Type</Text>
-              <Select radius='lg' placeholder="Pick Vehicle Type" data={['jetSki', 'snowmobile', 'razor']} clearable onChange={(value) => updateVehicleType(value)} value={vehicleType}/>
+              <Select radius='lg' placeholder="Pick Vehicle Type" data={selectableVehicles} clearable onChange={(value) => updateVehicleType(value)} value={vehicleType} />
             </div>
             <div className='horizontalDisplayComponents'>
               <Text size='md'>Start Date</Text>
@@ -42,7 +52,7 @@ export function Search() {
           <Button radius='lg' onClick={() => search()}> Search </Button>
         </div>
       </Card>
-
+      <ErrorMessage show={show} modalMessage={modalMessage} setShow={setShow}></ErrorMessage>
     </main>
   );
 }

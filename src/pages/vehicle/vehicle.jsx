@@ -3,8 +3,11 @@ import '../shared/style.css'
 import { useNavigate } from 'react-router-dom';
 import { Card, Title, Button, Text, Image } from '@mantine/core'
 import { rentVehicle } from '../../api/vehicleAPI'
+import { ErrorMessage } from '../shared/error.jsx';
 
 export function Vehicle() {
+  const [show, setShow] = React.useState("");
+  const [modalMessage, setModalMessage] = React.useState("");
   const lowTextProps = {
     size: 'lg'
   }
@@ -15,7 +18,11 @@ export function Vehicle() {
     vehicle.rented = true;
     const response = await rentVehicle(vehicle)
     if (response.ok) navigate('/success')
-    // TODO: else throw error
+    else {
+      const body = await response.json();
+      setModalMessage(`⚠ Error: ${body.msg}`)
+      setShow(true);
+    }
   }
 
   return (
@@ -32,6 +39,8 @@ export function Vehicle() {
             <Button onClick={() => rent()}> Book </Button>
           </div>
         </Card>
+
+        <ErrorMessage show={show} modalMessage={modalMessage} setShow={setShow}></ErrorMessage>
     </main>
   );
 }

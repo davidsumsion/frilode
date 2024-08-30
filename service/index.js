@@ -124,7 +124,6 @@ apiSecureRouter.get('/vehicles', async (req, res) => {
 
 apiSecureRouter.patch('/rentVehicle', async (req, res) => {
   //TODO: impolement error handling
-  console.log('PATCH VEHICLE')
   const vehicleId = req.body['vehicle-id'];
   await DB.rentVehicle(vehicleId)
   res.sendStatus(200)

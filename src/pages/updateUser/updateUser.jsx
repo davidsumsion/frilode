@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Title, TextInput } from '@mantine/core'
+import { ErrorMessage } from '../shared/error.jsx'
+import { updateUserInfo } from '../../api/userAPI'
 
 
 export function UpdateUser() {
@@ -8,21 +10,19 @@ export function UpdateUser() {
   const [firstName, updateFirstName] = React.useState("");
   const [preferredName, updatePreferredName] = React.useState("");
   const [lastName, updateLastName] = React.useState("");
+  const [show, setShow] = React.useState("");
+  const [modalMessage, setModalMessage] = React.useState("");
 
   const navigate = useNavigate();
   
   async function updateUser() {
-    console.log(`Phone; ${phone}`)
-    const response = await fetch('api/updateuser', {
-      method: 'PATCH',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ phone, firstName, preferredName, lastName})
-    });
-    // force all phone, firstName, prefferedName, lastname to not be ""
+    const response = await updateUserInfo(phone, firstName, preferredName, lastName)
     if (response.ok) navigate('/search')
-    // else throw error
+    else {
+      const body = await response.json();
+      setModalMessage(`⚠ Error: ${body.msg}`)
+      setShow(true);
+    }
   }
 
 
@@ -58,6 +58,7 @@ export function UpdateUser() {
                 </div>
             </div>
       </Card>
+      <ErrorMessage show={show} modalMessage={modalMessage} setShow={setShow}></ErrorMessage>
     </div>
   );
 }
