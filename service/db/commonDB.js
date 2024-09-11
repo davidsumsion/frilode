@@ -19,45 +19,54 @@ const bookingCollection = db.collection('booking');
 // const waiverCollection = db.collection('waiver');
 // const messagesCollection = db.collection('messages');
 
-// Old Collections
-// const jetSkiCollection = db.collection('jetski');
-// const snowmobileCollection = db.collection('snowmobile');
-// const razorCollection = db.collection('razor');
-
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
-})().catch((ex) => {
-  console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+})().catch((e) => {
+  console.log(`Unable to connect to database with ${url} because ${e.message}`);
   process.exit(1);
 });
 
 ///////////
 // Users //
+///////////
+
 function getUser(username) {
+  try {
     const user =  userCollection.findOne({ username: username });
     return user
+  } catch (e) {
+    throw new Error(`Error in getUser: ${e}`)
+  }
 }
 
 function getUserByToken(token) {
+  try {
     return userCollection.findOne({ token: token });
+  } catch (e) {
+    throw new Error(`Error in getUserByToken: ${e}`)
+  }
 }
 
 async function createUser(email, password) {
-  const passwordHash = await bcrypt.hash(password, 10);
-  const user = {
-    username: email,
-    password: passwordHash,
-    token: uuid.v4(),
-    phone: "",
-    firstName: "",
-    lastName: "",
-    preferredName: "",
-    rentedVehicles: {},
-    ownedVehicles: {}
-  };
-  await userCollection.insertOne(user);
-  return user;
+  try {
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = {
+      username: email,
+      password: passwordHash,
+      token: uuid.v4(),
+      phone: "",
+      firstName: "",
+      lastName: "",
+      preferredName: "",
+      rentedVehicles: {},
+      ownedVehicles: {}
+    };
+    await userCollection.insertOne(user);
+    return user;
+  } catch (e) {
+    throw new Error(`Error in createUser: ${e}`)
+  }
 }
 
 async function updateUserInfo(updatedUserInfo, token) {
@@ -68,34 +77,49 @@ async function updateUserInfo(updatedUserInfo, token) {
       {$set:{firstName: firstName, lastName:lastName, preferredName: preferredName, phone: phone}}
       )
   } catch (e) {
-    throw new Error(e)
+    throw new Error(`Error in updateUserInfo: ${e}`)
   }
 }
 
 //////////////
 // Vehicles //
-function getVehiclesByClass(vehicleType) {
-  return vehicleCollection.find({ vehicleType: vehicleType}).toArray()
+async function getVehiclesByClass(vehicleType) {
+  try {
+    return await vehicleCollection.find({ vehicleType: vehicleType}).toArray()
+  } catch (e) {
+    throw new Error(`Error in getVehiclesByClass: ${e}`)
+  }
 }
 
 async function rentVehicle(vehicleID) {
-  await vehicleCollection.updateOne(
-    {_id: ObjectId(vehicleID)},
-    { $set: {rented: true}}
-  )
+  try {
+    await vehicleCollection.updateOne(
+      {_id: ObjectId(vehicleID)},
+      { $set: {rented: true}}
+    )
+  } catch (e) {
+    throw new Error(`Error in rentVehicle: ${e}`)
+  }
 }
 
 function createVehicle(vehicle) {
-  //TODO validate vehicle before this function is called
-  vehicleCollection.insertOne(vehicle)
+  try {
+    const requiredFields = [ 'vehicleType', 'name', 'priceDay', 'priceHour', 'make', 'model', 'description', 'image']
+    const missingFields = requiredFields.filter(field => !vehicle[field]);
+    if (missingFields.length === 0 ){
+      vehicleCollection.insertOne(vehicle)
+    } else {
+      throw new Error(`Missing required field(s) for vehicle: ${missingFields.join(", ")}`)
+    }
+  } catch (e) {
+    throw new Error(`Error in createVehicle: ${e.message}`)
+  }
 }
-
 function removeVehicle(vehicleID) {
   vehicleCollection.deleteOne(
       { _id: ObjectId(vehicleID) }
   )
 }
-
 
 /////////////
 // booking //
@@ -113,9 +137,6 @@ function getBooking(bookingId) {
   const booking = bookingCollection.findOne( {_id : bookingId} )
   return JSON.stringify(booking)
 }
-
-
-
 
 module.exports = {
   getUser,
