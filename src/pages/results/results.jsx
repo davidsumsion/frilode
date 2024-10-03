@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Title, Card, Image, Text, Badge, Button, Group, Flex } from '@mantine/core'
 import '../shared/style.css'
+import './results.css'
 
 export function Results() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export function Results() {
   })
 
   return (
-    <div className="mainPage">
+    <div className="cardsPage">
       <Card shadow="sm" padding="lg" radius="md" withBorder>
         <Title> Results of your search: </Title>
         <div className="containerMarketplace">

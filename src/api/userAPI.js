@@ -1,6 +1,7 @@
 export const loginOrCreateUser = async (type, username, password) => {
     const endpoint = type === 'login' ? '/api/auth/login' : '/api/auth/create';
     return await fetch(endpoint, {
+        credentials: 'include',
         method: 'post',
         body: JSON.stringify({ username: username, password: password }),
         headers: {
@@ -17,6 +18,7 @@ export const logout = () => {
 
 export const updateUserInfo = async (phone, firstName, preferredName, lastName) => {
   return await fetch('api/updateuser', {
+    credentials: 'include',
     method: 'PATCH',
     headers: {
       'Content-type': 'application/json',
